@@ -4,7 +4,6 @@ define(function (require) {
 
 	var $                       = require('jquery'),
 	CustomReportView        = require("view/CustomReportView"),
-	
 	customReportUrl         = /^#customReport/;
 
 
@@ -24,6 +23,7 @@ define(function (require) {
 			view.inittable();
 			view.initdonut();
 			view.initgauge();
+			view.initselect();
 		}
 		
 	},

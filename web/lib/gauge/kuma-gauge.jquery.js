@@ -8,7 +8,7 @@
  *  Under MIT License
  */
 
- ;(function ( $, window, document, undefined ) {
+ (function ( $, window, document, undefined ) {
  	var config = {
  		radius : 80,
  		paddingX : 40,
@@ -239,7 +239,7 @@
             	}
             }
             if (_this.config.actualValue.display) {
-            	_this.$element.find('p').text(_this.config.actualValue.value).css('margin-left', '-30px');
+            	_this.$element.find('p').text(_this.config.actualValue.value).css('margin-left', '0px');
             }
 
 

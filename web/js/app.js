@@ -8,11 +8,14 @@ require.config({
         tpl     : '../tpl',
         handlerbars_localization : 'handlebars.localisation',
         locale : '../js/language/locale',
+        bootstrap : '../js/plugins/bootstrap.min',
+        // adapters : '../js/adapters'
     },
 
     map: {
         '*' : {
-            'adapters/custom-report' : 'app/adapters/custom-report-json'
+            'adapters/custom-report' : 'app/adapters/custom-report-json',
+            'adapters/custom-report-memory' : 'app/adapters/custom-report-memory'
         }
     },
     
@@ -23,11 +26,14 @@ require.config({
         handlerbars_localization : {
             deps : ['handlebars','locale'],
             exports : 'language'
+        },
+        bootstrap :{
+            deps : ['jquery']
         }
     }
 });
 
-require(['app/router','handlerbars_localization'], function (router) {
+require(['app/router','handlerbars_localization', 'bootstrap'], function (router) {
 
     "use strict";
 

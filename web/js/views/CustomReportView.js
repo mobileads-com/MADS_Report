@@ -2,21 +2,28 @@ define(function (require) {
 
 	"use strict";
 
-	var $                       = require('jquery'),
-	Handlebars              = require('handlebars'),
-	customReportAdapter     = require('adapters/custom-report'),
-	uHtml                   = require('text!tpl/CustomReport.html'),
+	var $ = require('jquery'),
+	Handlebars = require('handlebars'),
+	// customReportAdapter = require('adapters/custom-report'),
+	uHtml = require('text!tpl/CustomReport.html'),
+
 	bootstraptable = require('bootstrap-table.min'),
 	tableexport = require('export/bootstrap-table-export.min'),
 	jqueryexport = require('export/jquery-table-export.min'),
 
-	jqueryflot = require('donut/jquery.flot.min'),
-	jqueryflotpie = require('donut/jquery.flot.pie.min'),
+	tablesaw = require('tablesaw'),
+
+	jqueryexport = require('select/bootstrap-select.min'),
+
+	jqueryflot = require('donut/jquery.flot'),
+	jqueryflotpie = require('donut/jquery.flot.pie'),
+	jqueryflotresize = require('donut/jquery.flot.resize'),
 
 	raphael = require('gauge/raphael-min'),
 	gauge = require('gauge/kuma-gauge.jquery'),
-	
-	
+
+	reportdataadapter = require('adapters/custom-report-memory'),
+
 	uTpl= Handlebars.compile(uHtml);
 	
 	return function (data) {
@@ -29,13 +36,13 @@ define(function (require) {
 
 		this.inittable = function() {
 			$('#table-data > thead > tr > th:nth-child(2)').empty().append('Impressions <p>5000</p>');
-			$('#table-data > thead > tr > th:nth-child(3)').empty().append('Impressions <p>123, 246 (2.4%)</p>');
-			$('#table-data > thead > tr > th:nth-child(4)').empty().append('Impressions <p>123, 246 (2.4%)</p>');
-			$('#table-data > thead > tr > th:nth-child(5)').empty().append('Impressions <p>123, 246 (2.4%)</p>');
-			$('#table-data > thead > tr > th:nth-child(6)').empty().append('Impressions <p>123, 246 (2.4%)</p>');
-			$('#table-data > thead > tr > th:nth-child(7)').empty().append('Impressions <p>123, 246 (2.4%)</p>');
-			$('#table-data > thead > tr > th:nth-child(8)').empty().append('Impressions <p>123, 246 (2.4%)</p>');
-			$('#table-data > thead > tr > th:nth-child(9)').empty().append('Impressions <p>123, 246 (2.4%)</p>');
+			$('#table-data > thead > tr > th:nth-child(3)').empty().append('Expansions <p>123, 246 (2.4%)</p>');
+			$('#table-data > thead > tr > th:nth-child(4)').empty().append('Engagement <p>123, 246 (2.4%)</p>');
+			$('#table-data > thead > tr > th:nth-child(5)').empty().append('Clickthrough <p>123, 246 (2.4%)</p>');
+			$('#table-data > thead > tr > th:nth-child(6)').empty().append('Typen 1 <p>123, 246 (2.4%)</p>');
+			$('#table-data > thead > tr > th:nth-child(7)').empty().append('Typen 2 <p>123, 246 (2.4%)</p>');
+			$('#table-data > thead > tr > th:nth-child(8)').empty().append('Typen 3 <p>123, 246 (2.4%)</p>');
+			$('#table-data > thead > tr > th:nth-child(9)').empty().append('Typen 4 <p>123, 246 (2.4%)</p>');
 
 			$('#table-data').bootstrapTable({
 				pagination: true,
@@ -56,17 +63,6 @@ define(function (require) {
 					pie: { 
 						innerRadius: 0.4,
 						show: true,
-						// label: {
-						// 	show: true,
-						// 	radius: 1,
-						// 	formatter: function(label, series) {
-						// 		return '<div style="font-size:11px; text-align:center; padding:2px; color:white;">'+label+'<br/>'+Math.round(series.percent)+'%</div>';
-						// 	},
-						// 	background: {
-						// 		opacity: 0.8,
-						// 		color: '#444'
-						// 	}
-						// }
 					}
 				},
 				legend: {
@@ -169,6 +165,10 @@ define(function (require) {
 			a.max = g.getMax(a.rate, a.benchmark);
 
 			g.initialize('.gauge-clickthrough', a);
+		}
+
+		this.initselect = function(){
+			$('.selectpicker').selectpicker();
 		}
 
 		this.render = function () {
