@@ -2,37 +2,40 @@ define(function (require) {
 
 	"use strict";
 
-    var $                       = require('jquery'),
-        CustomReportView        = require("view/CustomReportView"),
+	var $                       = require('jquery'),
+	CustomReportView        = require("view/CustomReportView"),
 	
-        customReportUrl         = /^#customReport/;
+	customReportUrl         = /^#customReport/;
 
 
-		
+
 	var route = function() {
 		var hash = window.location.hash, match, view;
 
-        if (!hash) {
+		if (!hash) {
 
-            $('.main-content').html();
-        }
+			$('.main-content').html();
+		}
 
-        match = hash.match(customReportUrl);
-        if (match) {
-            view = new CustomReportView();
-            $('.main-content').html(view.render().$el);
-        }
+		match = hash.match(customReportUrl);
+		if (match) {
+			view = new CustomReportView();
+			$('.main-content').html(view.render().$el);
+			view.inittable();
+			view.initdonut();
+			view.initgauge();
+		}
 		
 	},
 
 	start = function () {
-        route();
+		route();
 		$(window).on('hashchange', route);		
 	};
 
     // The public API
     return {
-        start: start
+    	start: start
     };
 
-});
+  });
