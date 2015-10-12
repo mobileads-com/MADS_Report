@@ -12,8 +12,11 @@ define(function (require) {
 	jqueryexport = require('export/jquery-table-export.min'),
 
 	tablesaw = require('tablesaw'),
+	tablepager = require('table-pager'),
 
-	jqueryexport = require('select/bootstrap-select.min'),
+	bootstrapselect = require('select/bootstrap-select.min'),
+	moment = require('moment'),
+	bootstrapdatepicker = require('datepicker/bootstrap-datetimepicker.min'),
 
 	jqueryflot = require('donut/jquery.flot'),
 	jqueryflotpie = require('donut/jquery.flot.pie'),
@@ -22,40 +25,72 @@ define(function (require) {
 	raphael = require('gauge/raphael-min'),
 	gauge = require('gauge/kuma-gauge.jquery'),
 
-	reportdataadapter = require('adapters/custom-report-memory'),
+	
 
 	uTpl= Handlebars.compile(uHtml);
-	
+
 	return function (data) {
 		this.initialize = function () {
 			this.$el = $('<div/>');
-			$('#btnsample').on('click', function(){
-				alert('hello');
-			})
 		};
-
-		this.inittable = function() {
-			$('#table-data > thead > tr > th:nth-child(2)').empty().append('Impressions <p>5000</p>');
+		
+		this.inittable = function(report) {
+			$('#table-data > thead > tr > th:nth-child(2)').empty().append('Impressions <p>'+ report.impressions +'</p>');
 			$('#table-data > thead > tr > th:nth-child(3)').empty().append('Expansions <p>123, 246 (2.4%)</p>');
 			$('#table-data > thead > tr > th:nth-child(4)').empty().append('Engagement <p>123, 246 (2.4%)</p>');
 			$('#table-data > thead > tr > th:nth-child(5)').empty().append('Clickthrough <p>123, 246 (2.4%)</p>');
-			$('#table-data > thead > tr > th:nth-child(6)').empty().append('Typen 1 <p>123, 246 (2.4%)</p>');
-			$('#table-data > thead > tr > th:nth-child(7)').empty().append('Typen 2 <p>123, 246 (2.4%)</p>');
-			$('#table-data > thead > tr > th:nth-child(8)').empty().append('Typen 3 <p>123, 246 (2.4%)</p>');
-			$('#table-data > thead > tr > th:nth-child(9)').empty().append('Typen 4 <p>123, 246 (2.4%)</p>');
-
-			$('#table-data').bootstrapTable({
-				pagination: true,
-				showExport: true,
-				exportDataType: 'basic',
-				exportTypes: ['excel'],
-				buttonsAlign: 'left'
+			$('#table-data > thead > tr > th:nth-child(6)').empty().append('Type 1 <p>123, 246 (2.4%)</p>');
+			$('#table-data > thead > tr > th:nth-child(7)').empty().append('Type 2 <p>123, 246 (2.4%)</p>');
+			$('#table-data > thead > tr > th:nth-child(8)').empty().append('Type 3 <p>123, 246 (2.4%)</p>');
+			$('#table-data > thead > tr > th:nth-child(9)').empty().append('Type 4 <p>123, 246 (2.4%)</p>');
+			$('#table-data > tbody').empty();
+			$.each(report.data, function(index, val) {
+				$('#table-data > tbody').append('<tr>\
+						<td>10</td>\
+						<td>Table cell</td>\
+						<td>Table cell</td>\
+						<td>Table cell</td>\
+						<td>Table cell</td>\
+						<td>Table cell</td>\
+						<td>Table cell</td>\
+						<td>Table cell</td>\
+						<td>Table cell</td>\
+					</tr>'
+				);
 			});
+
+			// $('#table-data').bootstrapTable({
+			// 	data: report.data,
+			// 	pagination: true,
+			// 	showExport: true,
+			// 	exportDataType: 'basic',
+			// 	exportTypes: ['excel'],
+			// 	buttonsAlign: 'left'
+			// });
+
+			// $('.bootstrap-table').find('.pagination-detail').addClass('hidden');
+			
+			$('#table-data > tbody').pageMe({pagerSelector:'#table-pager',showPrevNext:true,hidePageNumbers:false,perPage:4});
+			$('#btnExcel').on('click', function(){
+				$('#table-data').tableExport({type:'excel',escape:'false'})
+			});
+			// Tablesaw.config = {
+			// 	swipe: {
+			// 		horizontalThreshold: 20, // default is 15
+			// 		verticalThreshold: 40 // default is 30
+			// 	}
+			// };
 		}
 
-		this.initdonut = function(){
-			var data = [{ label:"Firefox", data : 40 }, { label:"Google Chrome", data : 30 }, { label:"Opera", data : 10 },  { label:"Safari", data : 20 }],
-			series = Math.floor(Math.random() * 6) + 3;
+		this.initdonut = function(report){
+
+			var data = []
+			$.each(report, function(index, val) {
+				var a = {};
+				a.label = val.name;
+				a.data = val.value;
+				data.push(a);
+			});
 
 			var placeholder = $("#donut");
 			$.plot(placeholder, data, {
@@ -71,7 +106,7 @@ define(function (require) {
 			});
 		}
 
-		this.initgauge = function(){
+		this.initgauge = function(report, imp){
 			var gauge = function(){
 
 			}
@@ -83,7 +118,7 @@ define(function (require) {
 					value : data.rate,
 					fill : '#F34A53',
 					gaugeBackground : '#1E4147',
-					gaugeWidth : 20,
+					gaugeWidth : 30,
 					showNeedle : true,
 					needleHeight : 85,
 					actualValue : { // the value
@@ -127,6 +162,8 @@ define(function (require) {
 						fontWeight : 'bold'
 					}
 				});
+				
+				$('.gauge').find('svg').attr('class', 'center-block');
 			}
 
 			gauge.prototype.getMax = function(r, b){
@@ -138,37 +175,64 @@ define(function (require) {
 					return Math.ceil(Math.max(r, b));
 				}
 			}
+
+			$('.impressions-total').text(imp);
 			
 			var g = new gauge();
 
 			var a = {};
 			a.title = 'Expansion';
-			a.value = '123,456';
-			a.benchmark = 2;
-			a.rate = 2; 
+			a.value = report.expansion.value;
+			a.benchmark = report.expansion.benchmark;
+			a.rate = report.expansion.rate; 
 			a.max = g.getMax(a.rate, a.benchmark);
 			g.initialize('.gauge-expansion', a);
 
 			var a = {};
 			a.title = 'Engagement';
-			a.value = '456,789';
-			a.benchmark = 3.6;
-			a.rate = 3.4; 
+			a.value = report.engagement.value;
+			a.benchmark = report.engagement.benchmark;
+			a.rate =  report.engagement.rate;
 			a.max = g.getMax(a.rate, a.benchmark);
 			g.initialize('.gauge-engagement', a);
 
 			a = {}
 			a.title = 'Clickthrough';
-			a.value = '321,465';
-			a.benchmark = 8;
-			a.rate = 8.3; 
+			a.value = report.clickthrough.value;
+			a.benchmark = report.clickthrough.benchmark;
+			a.rate = report.clickthrough.rate; 
 			a.max = g.getMax(a.rate, a.benchmark);
 
 			g.initialize('.gauge-clickthrough', a);
 		}
 
-		this.initselect = function(){
-			$('.selectpicker').selectpicker();
+		this.initselect = function(options){
+			var select = function (){
+				$('.selectpicker').selectpicker();
+			}
+
+			select.prototype.populate = function(obj, selection){
+				$(obj).empty();
+				$.each(selection, function(index, val) {
+					$(obj).append('<option value="'+ val.value +'">'+ val.title +'</option>');
+				});
+				$(obj).selectpicker('refresh');
+			}
+
+			
+			var s = new select();
+
+			s.populate('#cboAdvertiser', options.advertiser);
+			s.populate('#cboCampaign', options.campaign);
+			s.populate('#cboCreatives', options.creative);
+		}
+
+		this.initdatepicker = function(){
+			$('#txtDate').datetimepicker({
+				format : 'MM/DD/YYYY',
+				useCurrent : true,
+				defaultDate : moment()
+			});
 		}
 
 		this.render = function () {

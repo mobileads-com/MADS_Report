@@ -27,7 +27,7 @@ The plugin supports these options:
 				left: integer value to move the pie left or right, or 'auto'
 			},
 			stroke: {
-				color: any hexidecimal color value (other formats may or may not work, so best to stick with something like '#FFF')
+				color: any hexidcecimal color value (other formats may or may not work, so best to stick with something like '#FFF')
 				width: integer pixel width of the stroke
 			},
 			label: {
@@ -324,7 +324,8 @@ More detail and specific examples can be found in the included HTML file.
 
 			if (attempts >= REDRAW_ATTEMPTS) {
 				clear();
-				target.prepend("<div class='error'>Could not draw pie with labels contained inside canvas</div>");
+				target.prepend("");
+				// target.prepend("<div class='error'>Could not draw pie with labels contained inside canvas</div>");
 			}
 
 			if (plot.setSeries && plot.insertLegend) {

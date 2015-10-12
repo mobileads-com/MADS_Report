@@ -9,7 +9,11 @@ require.config({
         handlerbars_localization : 'handlebars.localisation',
         locale : '../js/language/locale',
         bootstrap : '../js/plugins/bootstrap.min',
-        // adapters : '../js/adapters'
+        raphael : 'gauge/raphael-min',
+        kumagauge : 'gauge/kuma-gauge.jquery',
+        flot : 'donut/jquery.flot',
+        flotpie : 'donut/jquery.flot.pie',
+        flotresize : 'donut/jquery.flot.resize'
     },
 
     map: {
@@ -29,6 +33,15 @@ require.config({
         },
         bootstrap :{
             deps : ['jquery']
+        },
+        kumagauge : {
+            deps : ['raphael-min']
+        },
+        flotpie :{
+            deps : ['donut/jquery.flot']
+        },
+        flotresize : {
+            deps : ['donut/jquery.flot', 'donut/jquery.flot.pie']
         }
     }
 });

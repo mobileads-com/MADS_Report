@@ -393,7 +393,7 @@ table.tablesaw thead td {
 .tablesaw td,
 .tablesaw tbody th {
   vertical-align: middle;
-  /*font-size: 1.17em;*/
+  font-size: 1.17em;
   /* 19px */
 }
 
@@ -403,11 +403,11 @@ table.tablesaw thead td {
 }
 
 .tablesaw thead {
-  /*border: 1px solid #e5e5e4;*/
-  /*background: #e2dfdc;*/
-  /*background-image: -webkit-gradient(linear, left top, left bottom, from(#fff), to(#e2dfdc));*/
-  /*background-image: -webkit-linear-gradient(top, #fff, #e2dfdc);*/
-  /*background-image: linear-gradient(to bottom, #fff, #e2dfdc);*/
+  border: 1px solid #e5e5e4;
+  background: #e2dfdc;
+  background-image: -webkit-gradient(linear, left top, left bottom, from(#fff), to(#e2dfdc));
+  background-image: -webkit-linear-gradient(top, #fff, #e2dfdc);
+  background-image: linear-gradient(to bottom, #fff, #e2dfdc);
 }
 
 .tablesaw thead th {
