@@ -7,9 +7,9 @@ define(function (require) {
 	// customReportAdapter = require('adapters/custom-report'),
 	uHtml = require('text!tpl/CustomReport.html'),
 
-	bootstraptable = require('bootstrap-table.min'),
-	tableexport = require('export/bootstrap-table-export.min'),
-	jqueryexport = require('export/jquery-table-export.min'),
+	bootstraptable = require('bootstraptable'),
+	tableexport = require('tableexport'),
+	jqueryexport = require('jqueryexport'),
 
 	tablesaw = require('tablesaw'),
 	tablepager = require('table-pager'),
@@ -18,12 +18,12 @@ define(function (require) {
 	moment = require('moment'),
 	bootstrapdatepicker = require('datepicker/bootstrap-datetimepicker.min'),
 
-	jqueryflot = require('donut/jquery.flot'),
-	jqueryflotpie = require('donut/jquery.flot.pie'),
-	jqueryflotresize = require('donut/jquery.flot.resize'),
+	jqueryflot = require('flot'),
+	jqueryflotpie = require('flotpie'),
+	jqueryflotresize = require('flotresize'),
 
-	raphael = require('gauge/raphael-min'),
-	gauge = require('gauge/kuma-gauge.jquery'),
+	raphael = require('raphael'),
+	gauge = require('kumagauge'),
 
 	
 

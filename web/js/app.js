@@ -7,13 +7,17 @@ require.config({
         view    : '../js/views',
         tpl     : '../tpl',
         handlerbars_localization : 'handlebars.localisation',
+        jquery : 'jquery',
         locale : '../js/language/locale',
         bootstrap : '../js/plugins/bootstrap.min',
         raphael : 'gauge/raphael-min',
         kumagauge : 'gauge/kuma-gauge.jquery',
         flot : 'donut/jquery.flot',
         flotpie : 'donut/jquery.flot.pie',
-        flotresize : 'donut/jquery.flot.resize'
+        flotresize : 'donut/jquery.flot.resize',
+        bootstraptable : 'bootstrap-table.min',
+        tableexport : 'export/bootstrap-table-export.min',
+        jqueryexport : 'export/jquery-table-export.min'
     },
 
     map: {
@@ -34,14 +38,36 @@ require.config({
         bootstrap :{
             deps : ['jquery']
         },
+        raphael : {
+            exports : 'raphael'
+        },
         kumagauge : {
-            deps : ['raphael-min']
+            deps : ['raphael'],
+            exports : 'kumagauge'
+        },
+        flot : {
+            deps : ['jquery'],
+            exports : 'flot'
         },
         flotpie :{
-            deps : ['donut/jquery.flot']
+            deps : ['jquery', 'flot'],
+            exports : 'flotpie'
         },
         flotresize : {
-            deps : ['donut/jquery.flot', 'donut/jquery.flot.pie']
+            deps : ['jquery', 'flot', 'flotpie'],
+            exports : 'flotresize'
+        },
+        bootstraptable : {
+            deps : ['jquery'],
+            exports : 'bootstraptable'
+        },
+        tableexport : {
+            deps : ['jquery', 'bootstraptable'],
+            exports : 'bootstraptableexport'
+        },
+        jqueryexport : {
+            deps : ['jquery', 'bootstraptable'],
+            exports : 'jqueryexport'
         }
     }
 });
