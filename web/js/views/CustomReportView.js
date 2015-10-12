@@ -46,15 +46,15 @@ define(function (require) {
 			$('#table-data > tbody').empty();
 			$.each(report.data, function(index, val) {
 				$('#table-data > tbody').append('<tr>\
-						<td>10</td>\
-						<td>Table cell</td>\
-						<td>Table cell</td>\
-						<td>Table cell</td>\
-						<td>Table cell</td>\
-						<td>Table cell</td>\
-						<td>Table cell</td>\
-						<td>Table cell</td>\
-						<td>Table cell</td>\
+						<td>'+ val.date +'</td>\
+						<td>'+ val.impressions +'</td>\
+						<td>'+ val.expansion +'</td>\
+						<td>'+ val.engagement +'</td>\
+						<td>'+ val.clickthrough +'</td>\
+						<td>'+ val.type1 +'</td>\
+						<td>'+ val.type2 +'</td>\
+						<td>'+ val.type3 +'</td>\
+						<td>'+ val.type4 +'</td>\
 					</tr>'
 				);
 			});
