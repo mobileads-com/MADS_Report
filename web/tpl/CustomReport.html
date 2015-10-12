@@ -1,11 +1,11 @@
-<link rel="stylesheet" type="text/css" href="css/bootstrap-table.min.css">
+<!-- <link rel="stylesheet" type="text/css" href="css/bootstrap-table.min.css"> -->
 <link rel="stylesheet" type="text/css" href="css/tablesaw.css">
 <link rel="stylesheet" type="text/css" href="css/bootstrap-select.min.css">
 <link rel="stylesheet" type="text/css" href="css/bootstrap-datetimepicker.min.css">
 <link rel="stylesheet" type="text/css" href="css/custom-report.css">
 <div class="container-fluid">
 	<div class="row">
-		<div class="col-xs-12 col-sm-12 col-md-12 col-lg-12 col-lg-offset-1">
+		<div class="col-xs-12 col-sm-12 col-md-12 col-lg-12">
 			<h3>Heading</h3>
 			<div class="panel panel-default">
 				<div class="panel-body">
@@ -64,7 +64,7 @@
 		</div>
 	</div>
 	<div class="row">
-		<div class="col-xs-12 col-sm-12 col-md-12 col-lg-12 col-lg-offset-1">
+		<div class="col-xs-12 col-sm-12 col-md-12 col-lg-12">
 			<h3>Benchmarking</h3>
 			<div class="panel panel-default">
 				<div class="panel-body">
@@ -100,7 +100,7 @@
 		</div>
 	</div>
 	<div class="row">
-		<div class="col-xs-12 col-sm-12 col-md-12 col-lg-12 col-lg-offset-1">
+		<div class="col-xs-12 col-sm-12 col-md-12 col-lg-12">
 			<h3>Engagement Type</h3>
 			<div class="panel panel-default">
 				<div class="panel-body">
@@ -110,128 +110,28 @@
 		</div>
 	</div>
 	<div class="row">
-		<div class="col-xs-12 col-sm-12 col-md-12 col-lg-12 col-lg-offset-1">
+		<div class="col-xs-12 col-sm-12 col-md-12 col-lg-12">
 			<hr>
-			<!-- <table id="table-data" class="table-stripe tablesaw tablesaw-swipe" data-tablesaw-mode="swipe">
-				<thead>
-					<tr>
-						<th data-field="date" data-halign="center" scope="col" data-tablesaw-sortable-col data-tablesaw-priority="persist">Date <p>Total</p></th>
-						<th data-field="impressions" data-halign="center" data-align="right" scope="col" data-tablesaw-sortable-col data-tablesaw-sortable-default-col data-tablesaw-priority="8"></th>
-						<th data-field="expansion" data-halign="center" data-align="right" scope="col" data-tablesaw-sortable-col data-tablesaw-sortable-default-col data-tablesaw-priority="7"></th>
-						<th data-field="engagement" data-halign="center" data-align="right" scope="col" data-tablesaw-sortable-col data-tablesaw-sortable-default-col data-tablesaw-priority="6"></th>
-						<th data-field="clickthrough" data-halign="center" data-align="right" scope="col" data-tablesaw-sortable-col data-tablesaw-sortable-default-col data-tablesaw-priority="5"></th>
-						<th data-field="type1" data-halign="center" data-align="right" scope="col" data-tablesaw-sortable-col data-tablesaw-sortable-default-col data-tablesaw-priority="4"></th>
-						<th data-field="type2" data-halign="center" data-align="right" scope="col" data-tablesaw-sortable-col data-tablesaw-sortable-default-col data-tablesaw-priority="3"></th>
-						<th data-field="type3" data-halign="center" data-align="right" scope="col" data-tablesaw-sortable-col data-tablesaw-sortable-default-col data-tablesaw-priority="2"></th>
-						<th data-field="type4" data-halign="center" data-align="right" scope="col" data-tablesaw-sortable-col data-tablesaw-sortable-default-col data-tablesaw-priority="1"></th>
-					</tr>
-				</thead>
-			</table> -->
-		<!-- 	<table id="table-data">
-				<thead>
-					<tr>
-						<th scope="col" data-tablesaw-sortable-col data-tablesaw-priority="persist">Movie Title</th>
-						<th scope="col" data-tablesaw-sortable-col data-tablesaw-sortable-default-col data-tablesaw-priority="3">Rank</th>
-						<th scope="col" data-tablesaw-sortable-col data-tablesaw-priority="2">Year</th>
-						<th scope="col" data-tablesaw-sortable-col data-tablesaw-priority="1"><abbr title="Rotten Tomato Rating">Rating</abbr></th>
-						<th scope="col" data-tablesaw-sortable-col data-tablesaw-priority="4">Gross</th>
-					</tr>
-				</thead>
-				<tbody>
-					<tr>
-						<td class="title"><a href="http://en.wikipedia.org/wiki/Avatar_(2009_film)">Avatar</a></td>
-						<td>1</td>
-						<td>2009</td>
-						<td>83%</td>
-						<td>$2.7B</td>
-					</tr>
-					<tr>
-						<td class="title"><a href="http://en.wikipedia.org/wiki/Titanic_(1997_film)">Titanic</a></td>
-						<td>2</td>
-						<td>1997</td>
-						<td>88%</td>
-						<td>$2.1B</td>
-					</tr>
-					<tr>
-						<td class="title"><a href="http://en.wikipedia.org/wiki/The_Avengers_(2012_film)">The Avengers</a></td>
-						<td>3</td>
-						<td>2012</td>
-						<td>92%</td>
-						<td>$1.5B</td>
-					</tr>
-					<tr>
-						<td class="title"><a href="http://en.wikipedia.org/wiki/Harry_Potter_and_the_Deathly_Hallows_%E2%80%93_Part_2">Harry Potter and the Deathly Hallows—Part 2</a></td>
-						<td>4</td>
-						<td>2011</td>
-						<td>96%</td>
-						<td>$1.3B</td>
-					</tr>
-					<tr>
-						<td class="title"><a href="http://en.wikipedia.org/wiki/Frozen_(2013_film)">Frozen</a></td>
-						<td>5</td>
-						<td>2013</td>
-						<td>89%</td>
-						<td>$1.2B</td>
-					</tr>
-					<tr>
-						<td class="title"><a href="http://en.wikipedia.org/wiki/Iron_Man_3">Iron Man 3</a></td>
-						<td>6</td>
-						<td>2013</td>
-						<td>78%</td>
-						<td>$1.2B</td>
-					</tr>
-					<tr>
-						<td class="title"><a href="http://en.wikipedia.org/wiki/Transformers:_Dark_of_the_Moon">Transformers: Dark of the Moon</a></td>
-						<td>7</td>
-						<td>2011</td>
-						<td>36%</td>
-						<td>$1.1B</td>
-					</tr>
-					<tr>
-						<td class="title"><a href="http://en.wikipedia.org/wiki/The_Lord_of_the_Rings:_The_Return_of_the_King">The Lord of the Rings: The Return of the King</a></td>
-						<td>8</td>
-						<td>2003</td>
-						<td>95%</td>
-						<td>$1.1B</td>
-					</tr>
-					<tr>
-						<td class="title"><a href="http://en.wikipedia.org/wiki/Skyfall">Skyfall</a></td>
-						<td>9</td>
-						<td>2012</td>
-						<td>92%</td>
-						<td>$1.1B</td>
-					</tr>
-					<tr>
-						<td class="title"><a href="http://en.wikipedia.org/wiki/Transformers:_Age_of_Extinction">Transformers: Age of Extinction</a></td>
-						<td>10</td>
-						<td>2014</td>
-						<td>18%</td>
-						<td>$1.0B</td>
-					</tr>
-				</tbody>
-			</table> -->
-
-
 			<button type="button" class="btn btn-default" id="btnExcel">Excel</button>
 			<br>
 			<br>
-			<table id="table-data" class="table table-hover table-responsive tablesaw" data-tablesaw-mode="swipe" data-tablesaw-minimap>
-					<thead>
-						<tr>
-							<th class="text-center col-md-3" scope="col" data-tablesaw-sortable-col data-tablesaw-priority="persist">Date <p>TOTAL</p></th>
-							<th class="text-center col-md-1" scope="col" data-tablesaw-sortable-col data-tablesaw-sortable-default-col data-tablesaw-priority="8">Table heading</th>
-							<th class="text-center col-md-1" scope="col" data-tablesaw-sortable-col data-tablesaw-sortable-default-col data-tablesaw-priority="7">Table heading</th>
-							<th class="text-center col-md-1" scope="col" data-tablesaw-sortable-col data-tablesaw-sortable-default-col data-tablesaw-priority="6">Table heading</th>
-							<th class="text-center col-md-1" scope="col" data-tablesaw-sortable-col data-tablesaw-sortable-default-col data-tablesaw-priority="5">Table heading</th>
-							<th class="text-center col-md-1" scope="col" data-tablesaw-sortable-col data-tablesaw-sortable-default-col data-tablesaw-priority="4">Table heading</th>
-							<th class="text-center col-md-1" scope="col" data-tablesaw-sortable-col data-tablesaw-sortable-default-col data-tablesaw-priority="3">Table heading</th>
-							<th class="text-center col-md-1" scope="col" data-tablesaw-sortable-col data-tablesaw-sortable-default-col data-tablesaw-priority="2">Table heading</th>
-							<th class="text-center col-md-1" scope="col" data-tablesaw-sortable-col data-tablesaw-sortable-default-col data-tablesaw-priority="1">Table heading</th>
-						</tr>
-					</thead>
-					<tbody></tbody>
-				</table>   
-				<ul class="pagination pull-right" id="table-pager"></ul>
+			<table id="table-data" class="tablesaw" data-tablesaw-mode="swipe" data-tablesaw-minimap>
+				<thead>
+					<tr>
+						<th class="text-center"  scope="col" data-tablesaw-sortable-col data-tablesaw-priority="persist">Date <p>TOTAL</p></th>
+						<th class="text-center"  scope="col" data-tablesaw-sortable-col data-tablesaw-sortable-default-col data-tablesaw-priority="8">Table heading</th>
+						<th class="text-center"  scope="col" data-tablesaw-sortable-col data-tablesaw-sortable-default-col data-tablesaw-priority="7">Table heading</th>
+						<th class="text-center"  scope="col" data-tablesaw-sortable-col data-tablesaw-sortable-default-col data-tablesaw-priority="6">Table heading</th>
+						<th class="text-center"  scope="col" data-tablesaw-sortable-col data-tablesaw-sortable-default-col data-tablesaw-priority="5">Table heading</th>
+						<th class="text-center"  scope="col" data-tablesaw-sortable-col data-tablesaw-sortable-default-col data-tablesaw-priority="4">Table heading</th>
+						<th class="text-center"  scope="col" data-tablesaw-sortable-col data-tablesaw-sortable-default-col data-tablesaw-priority="3">Table heading</th>
+						<th class="text-center"  scope="col" data-tablesaw-sortable-col data-tablesaw-sortable-default-col data-tablesaw-priority="2">Table heading</th>
+						<th class="text-center"  scope="col" data-tablesaw-sortable-col data-tablesaw-sortable-default-col data-tablesaw-priority="1">Table heading</th>
+					</tr>
+				</thead>
+				<tbody></tbody>
+			</table>   
+			<ul class="pagination pull-right" id="table-pager"></ul>
 		</div>
 	</div>
 	<br>

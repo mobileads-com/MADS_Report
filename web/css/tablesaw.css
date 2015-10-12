@@ -295,6 +295,8 @@ table.tablesaw {
 .tablesaw-bar {
   clear: both;
   font-family: sans-serif;
+  width: 50%;
+  float: right !important;
 }
 
 .tablesaw-toolbar {
@@ -386,15 +388,15 @@ table.tablesaw thead td {
 .tablesaw th,
 .tablesaw td {
   line-height: 1em;
-  text-align: left;
+  /*text-align: left;*/
   vertical-align: middle;
 }
 
 .tablesaw td,
 .tablesaw tbody th {
   vertical-align: middle;
-  font-size: 1.17em;
-  /* 19px */
+  font-size: 14px;
+  /* 19px 1.17em*/
 }
 
 .tablesaw td .btn,
@@ -404,10 +406,10 @@ table.tablesaw thead td {
 
 .tablesaw thead {
   border: 1px solid #e5e5e4;
-  background: #e2dfdc;
-  background-image: -webkit-gradient(linear, left top, left bottom, from(#fff), to(#e2dfdc));
+  /*background: #e2dfdc;*/
+/*  background-image: -webkit-gradient(linear, left top, left bottom, from(#fff), to(#e2dfdc));
   background-image: -webkit-linear-gradient(top, #fff, #e2dfdc);
-  background-image: linear-gradient(to bottom, #fff, #e2dfdc);
+  background-image: linear-gradient(to bottom, #fff, #e2dfdc);*/
 }
 
 .tablesaw thead th {
@@ -415,7 +417,7 @@ table.tablesaw thead td {
   color: #777;
   text-transform: uppercase;
   text-shadow: 0 1px 0 #fff;
-  text-align: left;
+  /*text-align: left;*/
 }
 
 .tablesaw thead tr:first-child th {
@@ -838,7 +840,7 @@ table.tablesaw thead td {
 
 .tablesaw-advance-dots {
   float: left;
-  margin: 0;
+  margin: 10px 0 0 0 ;
   padding: 0;
   list-style: none;
 }

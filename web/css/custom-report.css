@@ -22,3 +22,25 @@
 .well.impressions p{
 	font-size: 19px;
 }
+
+.table > thead > tr > th{
+	vertical-align: top;
+}
+
+#table-data > thead > tr > th:not(p){
+    font-weight: BOLD;
+}
+
+#table-data > thead > tr > th > p{
+    font-weight: normal;
+    padding-top: 6px;
+}
+
+#table-data > tbody > tr > td:first-child{
+	border-left:  1px solid #e4e1de;
+}
+
+
+#table-data > tbody > tr > td:last-child{
+	border-right:  1px solid #e4e1de;
+}

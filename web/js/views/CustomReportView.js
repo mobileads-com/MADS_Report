@@ -12,11 +12,11 @@ define(function (require) {
 	jqueryexport = require('jqueryexport'),
 
 	tablesaw = require('tablesaw'),
-	tablepager = require('table-pager'),
+	tablepager = require('table_pager'),
 
-	bootstrapselect = require('select/bootstrap-select.min'),
+	bootstrapselect = require('bootstrap_select'),
 	moment = require('moment'),
-	bootstrapdatepicker = require('datepicker/bootstrap-datetimepicker.min'),
+	bootstrapdatepicker = require('bootstrap_datepicker'),
 
 	jqueryflot = require('flot'),
 	jqueryflotpie = require('flotpie'),
@@ -35,6 +35,7 @@ define(function (require) {
 		};
 		
 		this.inittable = function(report) {
+			//used for modifying total data on the table headers
 			$('#table-data > thead > tr > th:nth-child(2)').empty().append('Impressions <p>'+ report.impressions +'</p>');
 			$('#table-data > thead > tr > th:nth-child(3)').empty().append('Expansions <p>123, 246 (2.4%)</p>');
 			$('#table-data > thead > tr > th:nth-child(4)').empty().append('Engagement <p>123, 246 (2.4%)</p>');
@@ -46,45 +47,35 @@ define(function (require) {
 			$('#table-data > tbody').empty();
 			$.each(report.data, function(index, val) {
 				$('#table-data > tbody').append('<tr>\
-						<td>'+ val.date +'</td>\
-						<td>'+ val.impressions +'</td>\
-						<td>'+ val.expansion +'</td>\
-						<td>'+ val.engagement +'</td>\
-						<td>'+ val.clickthrough +'</td>\
-						<td>'+ val.type1 +'</td>\
-						<td>'+ val.type2 +'</td>\
-						<td>'+ val.type3 +'</td>\
-						<td>'+ val.type4 +'</td>\
+						<td class="text-center">'+ val.date +'</td>\
+						<td class="text-right">'+ val.impressions +'</td>\
+						<td class="text-right">'+ val.expansion +'</td>\
+						<td class="text-right">'+ val.engagement +'</td>\
+						<td class="text-right">'+ val.clickthrough +'</td>\
+						<td class="text-right">'+ val.type1 +'</td>\
+						<td class="text-right">'+ val.type2 +'</td>\
+						<td class="text-right">'+ val.type3 +'</td>\
+						<td class="text-right">'+ val.type4 +'</td>\
 					</tr>'
 				);
 			});
-
-			// $('#table-data').bootstrapTable({
-			// 	data: report.data,
-			// 	pagination: true,
-			// 	showExport: true,
-			// 	exportDataType: 'basic',
-			// 	exportTypes: ['excel'],
-			// 	buttonsAlign: 'left'
-			// });
-
-			// $('.bootstrap-table').find('.pagination-detail').addClass('hidden');
 			
-			$('#table-data > tbody').pageMe({pagerSelector:'#table-pager',showPrevNext:true,hidePageNumbers:false,perPage:4});
+			/**
+			* IMPLEMENT CUSTOM TABLE PAGINATION
+			* PARAMS : pagerSelector - element, perPage - records count to display
+			*/
+			$('#table-data > tbody').pageMe({ pagerSelector:'#table-pager', showPrevNext:true,hidePageNumbers:false, perPage:5 });
+			$('#table-data').table().data( "table" ).refresh();
+			//
 			$('#btnExcel').on('click', function(){
 				$('#table-data').tableExport({type:'excel',escape:'false'})
 			});
-			// Tablesaw.config = {
-			// 	swipe: {
-			// 		horizontalThreshold: 20, // default is 15
-			// 		verticalThreshold: 40 // default is 30
-			// 	}
-			// };
 		}
 
 		this.initdonut = function(report){
+			var data = [];
 
-			var data = []
+			//Loop through the data and push to the new array to suit names and labels
 			$.each(report, function(index, val) {
 				var a = {};
 				a.label = val.name;
@@ -107,10 +98,10 @@ define(function (require) {
 		}
 
 		this.initgauge = function(report, imp){
-			var gauge = function(){
+			//the gauge object
+			var gauge = function(){}
 
-			}
-
+			//used for gauge initialization
 			gauge.prototype.initialize = function(ele, data){
 				$(ele).kumaGauge({
 					min: 0,
@@ -166,6 +157,7 @@ define(function (require) {
 				$('.gauge').find('svg').attr('class', 'center-block');
 			}
 
+			//used to get max value of a given two value or number
 			gauge.prototype.getMax = function(r, b){
 				r = parseFloat(r);
 				b = parseFloat(b);
@@ -180,6 +172,7 @@ define(function (require) {
 			
 			var g = new gauge();
 
+			//Initialization of gauge for expansion data
 			var a = {};
 			a.title = 'Expansion';
 			a.value = report.expansion.value;
@@ -188,6 +181,7 @@ define(function (require) {
 			a.max = g.getMax(a.rate, a.benchmark);
 			g.initialize('.gauge-expansion', a);
 
+			//Initialization of gauge for engagement data
 			var a = {};
 			a.title = 'Engagement';
 			a.value = report.engagement.value;
@@ -196,21 +190,23 @@ define(function (require) {
 			a.max = g.getMax(a.rate, a.benchmark);
 			g.initialize('.gauge-engagement', a);
 
+			//Initialization of gauge for clickthrough data
 			a = {}
 			a.title = 'Clickthrough';
 			a.value = report.clickthrough.value;
 			a.benchmark = report.clickthrough.benchmark;
 			a.rate = report.clickthrough.rate; 
 			a.max = g.getMax(a.rate, a.benchmark);
-
 			g.initialize('.gauge-clickthrough', a);
 		}
 
 		this.initselect = function(options){
+			//selectpicker object
 			var select = function (){
 				$('.selectpicker').selectpicker();
 			}
 
+			//used to loop through array of data and populate selectpicker
 			select.prototype.populate = function(obj, selection){
 				$(obj).empty();
 				$.each(selection, function(index, val) {
@@ -221,12 +217,13 @@ define(function (require) {
 
 			
 			var s = new select();
-
+			//feed the data to the selectpickers.
 			s.populate('#cboAdvertiser', options.advertiser);
 			s.populate('#cboCampaign', options.campaign);
 			s.populate('#cboCreatives', options.creative);
 		}
 
+		//Initialization of the datepicker
 		this.initdatepicker = function(){
 			$('#txtDate').datetimepicker({
 				format : 'MM/DD/YYYY',
