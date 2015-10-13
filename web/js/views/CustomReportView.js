@@ -66,11 +66,12 @@ define(function (require) {
 			* PARAMS : pagerSelector - element, perPage - records count to display
 			*/
 			$('#table-data > tbody').pageMe({ pagerSelector:'#table-pager', showPrevNext:true,hidePageNumbers:false, perPage:5 });
-
+			//refresh the table to implement tablesaw responsive
 			$('#table-data').table().data( "table" ).refresh();
 
+			//table sorter initialization
 			$('#table-data').tablesorter();
-			$('#table-data').trigger('refreshWidgets', [false, false]);
+			// $('#table-data').trigger('refreshWidgets', [false, false]);
 			//
 			$('#btnExcel').on('click', function(){
 				$('#table-data').tableExport({type:'excel',escape:'false'})
