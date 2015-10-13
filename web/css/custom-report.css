@@ -44,3 +44,12 @@
 #table-data > tbody > tr > td:last-child{
 	border-right:  1px solid #e4e1de;
 }
+
+button#btnExcel {
+    margin-top: -8px;
+    position: absolute;
+}
+
+.gauge-holder.form-group{
+	padding-bottom: 10px;
+}

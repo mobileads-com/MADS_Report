@@ -7,9 +7,10 @@ define(function (require) {
 	// customReportAdapter = require('adapters/custom-report'),
 	uHtml = require('text!tpl/CustomReport.html'),
 
-	bootstraptable = require('bootstraptable'),
-	tableexport = require('tableexport'),
+	// bootstraptable = require('bootstraptable'),
+	// tableexport = require('tableexport'),
 	jqueryexport = require('jqueryexport'),
+	jquerysort = require('jquerysort'),
 
 	tablesaw = require('tablesaw'),
 	tablepager = require('table_pager'),
@@ -65,7 +66,11 @@ define(function (require) {
 			* PARAMS : pagerSelector - element, perPage - records count to display
 			*/
 			$('#table-data > tbody').pageMe({ pagerSelector:'#table-pager', showPrevNext:true,hidePageNumbers:false, perPage:5 });
+
 			$('#table-data').table().data( "table" ).refresh();
+
+			$('#table-data').tablesorter();
+			$('#table-data').trigger('refreshWidgets', [false, false]);
 			//
 			$('#btnExcel').on('click', function(){
 				$('#table-data').tableExport({type:'excel',escape:'false'})
@@ -144,7 +149,7 @@ define(function (require) {
 						fontWeight : 'normal',
 					},
 					label : {
-						display : true,
+						display : false,
 						left : 0,
 						right : data.max,
 						fontFamily : 'Helvetica',

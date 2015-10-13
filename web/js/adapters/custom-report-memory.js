@@ -58,13 +58,13 @@ define(function (require) {
 		{
 			'date' : '10/09/2015',
 			'impressions' : '5000',
-			'expansion' : '100',
-			'engagement' : '200',
-			'clickthrough' : '300',
-			'type1' : '100',
-			'type2' : '200',
-			'type3' : '300',
-			'type4' : '400'
+			'expansion' : '200',
+			'engagement' : '300',
+			'clickthrough' : '400',
+			'type1' : '500',
+			'type2' : '600',
+			'type3' : '700',
+			'type4' : '100'
 		},
 		{
 			'date' : '10/10/2015',
@@ -80,13 +80,13 @@ define(function (require) {
 			{
 			'date' : '10/11/2015',
 			'impressions' : '5000',
-			'expansion' : '100',
-			'engagement' : '200',
-			'clickthrough' : '300',
-			'type1' : '100',
-			'type2' : '200',
-			'type3' : '300',
-			'type4' : '400'
+			'expansion' : '800',
+			'engagement' : '400',
+			'clickthrough' : '600',
+			'type1' : '400',
+			'type2' : '300',
+			'type3' : '200',
+			'type4' : '100'
 		},
 		{
 			'date' : '10/12/2015',
