@@ -312,49 +312,40 @@
             // Animate the gauge to the right value position
             _this.gauge.gaugeBackground.animate({transform:'r' + _this._calculateRotation(_this.config.min, _this.config.max, _this.config.value) + ',' + _this.config.centerX + ',' + _this.config.centerY}, _this.config.animationSpeed, '<>');
 
-
-            // var valCalculated = (_this.config.benchmark.value - _this.config.min) * (330 - 30) / (_this.config.max - _this.config.min) + 30;
-
             _this.gauge.needle.animate({transform:'r '+ _this._calculateNeedlePoint(_this.config.min, _this.config.max, _this.config.benchmark.value) +',' + _this.config.centerX + ',' + _this.config.centerY}, _this.config.animationSpeed, '<>');
-            // var nBox =  _this.gauge.needle.getBBox();
-            // var x_rpoint =  nBox.x + (nBox.width/2);
-            // var y_rpoint = nBox.y + nBox.height;
-            // _this.gauge.needle.animate({transform: 'r' + Math.round((_this.config.benchmark.value*3.6/250) * 270) + ","+x_rpoint+","+y_rpoint}, _this.config.animationSpeed); 
-            // _this.gauge.needle.animate({transform:'r 0,' + _this.config.centerX + ',' + _this.config.centerY}, _this.config.animationSpeed, '<>');
-            // _this.gauge.needle.animate({transform:'r' + _this._calculateRotation(_this.config.min, _this.config.max, _this.config.value) + ',' + _this.config.centerX + ',' + _this.config.centerY}, _this.config.animationSpeed, '<>');
-            // Point the needle to the right angle
-            // console.log('bmark -' + _this.config.benchmark.value);
-            // var needlepoint  = _this._calculateRotation(_this.config.min, _this.config.max, _this.config.value);
-            // console.log('point ' + needlepoint);
-            // // console.log('benchmark -' + _this.config.benchmark.value);
-            // _this.$element.find('.gauge__needle').css({
-            // 	'-webkit-transform' : 'rotate('+ needlepoint +'deg)',
-            // 	'-moz-transform'    : 'rotate('+ needlepoint +'deg)',
-            // 	'-ms-transform'     : 'rotate('+ needlepoint +'deg)',
-            // 	'-o-transform'      : 'rotate('+ needlepoint +'deg)',
-            // 	'transform'         : 'rotate('+ needlepoint +'deg)',
-            // 	'transform-origin' : 'bottom'
-            // });
+
 
 },
 update: function (data) {
             //this
             var _this = this;
 
-            var  updateGauge = function(min, max, value) {
+            var  updateGauge = function(min, max, value, actualValue, benchmark) {
             	_this.config.min = min;
             	_this.config.max = max;
             	_this.config.value = value;
-
+                console.log(data);
+                _this.config.actualValue = data.actualValue.value;
+                _this.config.benchmark = data.benchmark.value;
+                _this.config.benchmark.display = data.benchmark.display;
+                console.log(data);
                 // Update the rotation of the gauge
-                _this.gauge.gaugeBackground.animate({transform:'r' +
-                	_this._calculateRotation(min, max, value) + ',' +
-                	_this.config.centerX + ',' + _this.config.centerY}, _this.config.animationSpeed, '<>');
+                _this.gauge.gaugeBackground.animate({transform:'r' +_this._calculateRotation(min, max, value) + ',' +_this.config.centerX + ',' + _this.config.centerY}, _this.config.animationSpeed, '<>');
+
+                 _this.gauge.needle.animate({transform:'r '+ _this._calculateNeedlePoint(min, max, data.benchmark.value) +',' + _this.config.centerX + ',' + _this.config.centerY}, _this.config.animationSpeed, '<>');
+
+            if (data.actualValue.display) {
+              _this.$element.find('p').text(data.actualValue.value).css('margin-left', '0px');
+            }
+
+              if(data.benchmark.display){
+                $('.gauge__benchmark').find('tspan').text('Benchmark ' + data.benchmark.value +'%');
+              }
 
                 // Update the value label
                 if (_this.config.valueLabel.display) {
                 	if (_this.config.showNeedle) {
-                		_this.gauge.valueLabel.attr('text', value);
+                		_this.gauge.valueLabel.attr('text', value + '%');
                 	} else {
                 		_this.gauge.valueLabel.attr('text', (max - min) / 2);
                 	}

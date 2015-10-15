@@ -109,11 +109,20 @@ define(function (require) {
 		//function to get benchmark value
 		gauge.prototype.getBenchmark = function(value, impressions){
 			var benchmark = value / impressions * 100;
-			return benchmark;
+			return benchmark.toFixed(2);
 		}
 
-		gauge.prototype.update = function(){
-
+		gauge.prototype.update = function(ele, type, impressions){ //type = exp, eng or ct
+			var _this = this;
+			var benchmark = _this.getBenchmark(type, impressions);
+			var rate = _this.getRate(type, impressions);
+			$(ele).kumaGauge('update', {
+				min : 0,
+				max : _this.getMax( rate,  benchmark),
+				value : rate,
+				actualValue : { value : type, display : true },
+				benchmark : { value : benchmark, display : true }
+			});
 		}
 
 		//donut object
@@ -272,6 +281,7 @@ define(function (require) {
 		}
 
 		this.events = function(){
+			var _this = this;
 			$('.rangepicker i').click(function() {
 				$(this).parent().find('input').click();
 			});
@@ -284,9 +294,13 @@ define(function (require) {
 					'startDate' : $('#txtDateFrom').data('daterangepicker').startDate.format('YYYY-MM-DD'),
 					'endDate' : $('#txtDateFrom').data('daterangepicker').endDate.format('YYYY-MM-DD')
 				}
-				console.log(data);
 
+				
 				$.post('', data , function(data, textStatus, xhr) {
+					// _this.initdonut(data.engagementType);
+					// gauge.prototype.update('.gauge-expansion', data.expansion, data.impressions);
+					// gauge.prototype.update('.gauge-engagement', data.engagement, data.impressions);
+					// gauge.prototype.update('.gauge-clickthrough', data.clickthrough, data.impressions);
 					/*optional stuff to do after success */
 				});
 				return false;
