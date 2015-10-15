@@ -22,7 +22,7 @@ require.config({
 		tablesaw : 'tablesaw',
 
 		moment : 'moment',
-		bootstrap_datepicker : 'datepicker/bootstrap-datetimepicker.min',
+		bootstrap_datepicker : 'datepicker/daterangepicker',
 		bootstrap_select : 'select/bootstrap-select.min',
 		table_pager : 'table-pager'
 	},

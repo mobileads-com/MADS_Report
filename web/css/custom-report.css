@@ -14,42 +14,53 @@
 	height: 400px;
 }
 
-.well.impressions{
+.well.impressions {
 	height: 27%;
 	padding-top: 50px;
 }
 
-.well.impressions p{
+.well.impressions p {
 	font-size: 19px;
 }
 
-.table > thead > tr > th{
+.table > thead > tr > th {
 	vertical-align: top;
 }
 
-#table-data > thead > tr > th:not(p){
-    font-weight: BOLD;
+#table-data > thead > tr > th:not(p) {
+	font-weight: BOLD;
 }
 
-#table-data > thead > tr > th > p{
-    font-weight: normal;
-    padding-top: 6px;
+#table-data > thead > tr > th > p {
+	font-weight: normal;
+	padding-top: 6px;
 }
 
-#table-data > tbody > tr > td:first-child{
-	border-left:  1px solid #e4e1de;
+#table-data > tbody > tr > td:first-child {
+	border-left: 1px solid #e4e1de;
 }
 
-
-#table-data > tbody > tr > td:last-child{
-	border-right:  1px solid #e4e1de;
+#table-data > tbody > tr > td:last-child {
+	border-right: 1px solid #e4e1de;
 }
 
 button#btnExcel {
-    margin-top: -8px;
-    position: absolute;
+	margin-top: -8px;
+	position: absolute;
 }
 
-.gauge-holder.form-group{
+.gauge-holder.form-group {
 	padding-bottom: 10px;
+}
+
+.rangepicker {
+	position: relative;
+}
+
+.rangepicker i {
+	position: absolute;
+	bottom: 10px;
+	right: 14px;
+	top: auto;
+	cursor: pointer;
 }
