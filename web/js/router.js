@@ -26,8 +26,9 @@ define(function (require) {
 				view.initselect(data);
 			});	
 			reportdataadapter.getCustomReport().done(function(data){
+				// console.log(data);
 				// setTimeout(function(){
-					view.initgauge(data, data.impressions);
+					view.initgauge(data);
 					view.initdonut(data.engagementType);
 					view.inittable(data);
 				// }, 2000);

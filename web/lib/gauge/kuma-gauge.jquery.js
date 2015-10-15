@@ -135,17 +135,17 @@
           	return _rotation;
           },
           _calculateNeedlePoint : function(min, max, benchmark) {
-               	var _range, _rotation;
-	          	_range = max - min;
+          	var _range, _rotation;
+          	_range = max - min;
 
-	          	if (benchmark < max && benchmark > min) {
-	          		_rotation = 180 * ((benchmark - min) / _range);
-	          	} else if (benchmark <= min){
-	          		_rotation = 0;
-	          	} else {
-	          		_rotation = 179;
-	          	}
-	          	return _rotation - 90;
+          	if (benchmark < max && benchmark > min) {
+          		_rotation = 180 * ((benchmark - min) / _range);
+          	} else if (benchmark <= min){
+          		_rotation = 0;
+          	} else {
+          		_rotation = 179;
+          	}
+          	return _rotation - 90;
           },
           draw : function() {
             //this
@@ -336,8 +336,8 @@
             // 	'transform-origin' : 'bottom'
             // });
 
-          },
-          update: function (data) {
+},
+update: function (data) {
             //this
             var _this = this;
 
