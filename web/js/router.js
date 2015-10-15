@@ -34,6 +34,7 @@ define(function (require) {
 				// }, 2000);
 			});
 			view.initdatepicker();
+			view.events();
 		}
 		
 	},

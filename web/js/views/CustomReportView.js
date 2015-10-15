@@ -250,9 +250,26 @@ define(function (require) {
 		//Initialization of the datepicker
 		this.initdatepicker = function(){
 			$('#txtDate').datetimepicker({
-				format : 'MM/DD/YYYY',
+				format : 'YYYY-MM-DD',
 				useCurrent : true,
 				defaultDate : moment()
+			});
+		}
+
+		this.events = function(){
+			this.$el.on('submit', '#form-data', function(){
+				var data = {
+					'pubUserId' : $('#cboAdvertiser').val(),
+					'campaignId' : $('#cboCampaign').val(),
+					'studioId' : $('#cboCreatives').val(),
+					'startDate' : $('#txtDateFrom').val(),
+					// 'endDate' : '2015-10-09'
+				}
+
+				$.post('', data , function(data, textStatus, xhr) {
+					/*optional stuff to do after success */
+				});
+				return false;
 			});
 		}
 
