@@ -109,7 +109,15 @@
 	<div class="row">
 		<div class="col-xs-12 col-sm-12 col-md-12 col-lg-12">
 			<hr>
-			<button type="button" class="btn btn-default" id="btnExcel">Excel</button>
+			<!-- <button type="button" class="btn btn-default" id="btnExcel">Excel</button> -->
+			<div class="btn-group data-export">
+				<button type="button" class="btn btn-default dropdown-toggle" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
+					Export  <i class="glyphicon glyphicon-export"></i>
+				</button>
+				<ul class="dropdown-menu">
+					<li data-type="excel"><a href="javascript:void(0)">Excel</a></li>
+				</ul>
+			</div>
 			<table id="table-data" class="tablesaw tablesorter" data-tablesaw-mode="swipe" data-tablesaw-minimap>
 				<thead>
 					<tr>

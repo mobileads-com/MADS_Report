@@ -44,7 +44,7 @@
 	border-right: 1px solid #e4e1de;
 }
 
-button#btnExcel {
+.data-export {
 	margin-top: -8px;
 	position: absolute;
 }

@@ -176,9 +176,13 @@ define(function (require) {
 						</tr>'
 					);
 				});
-				$('#btnExcel').on('click', function(){
-					$('#table-data').tableExport({type:'excel',escape:'false', fileName : 'table-report'});
-				}).removeClass('hidden');
+
+				$('.data-export a').on('click', function(){
+					var type = $(this).closest('li').attr('data-type');
+					$('#table-data').tableExport({type: type ,escape:'false', fileName : 'table-report'});
+				});
+				$('.data-export').removeClass('hidden');
+
 			}else{
 				$('#table-data > tbody').append('<tr>\
 					<td class="text-center" colspan="10">No data to display</td>\
