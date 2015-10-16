@@ -295,13 +295,13 @@ define(function (require) {
 					'endDate' : $('#txtDateFrom').data('daterangepicker').endDate.format('YYYY-MM-DD')
 				}
 
-				
+				//ajax request to fetch data from server and update plugins data.
 				$.post('', data , function(data, textStatus, xhr) {
 					// _this.initdonut(data.engagementType);
+					//_this.inittable(data);
 					// gauge.prototype.update('.gauge-expansion', data.expansion, data.impressions);
 					// gauge.prototype.update('.gauge-engagement', data.engagement, data.impressions);
 					// gauge.prototype.update('.gauge-clickthrough', data.clickthrough, data.impressions);
-					/*optional stuff to do after success */
 				});
 				return false;
 			});

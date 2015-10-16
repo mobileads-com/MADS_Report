@@ -232,10 +232,83 @@ define(function (require) {
 	// },
 	
 	filterOptions = {
-		'advertiser' : [{title:'Advertiser 1',value:'1'}, {title:'Advertise 2',value:'2'} ],
-		'campaign'   : [{title:'Campaign 1',value:'1'}, {title:'Campaign 2',value:'2'} ],
-		'creative'   : [{title:'Creative 1',value:'1'}, {title:'Creative 2',value:'2'} ]
+		"advertiser" : [{
+			"title" : "Test Advertiser",
+			"value" : 302
+		}, {
+			"title" : "Mervin",
+			"value" : 734
+		}, {
+			"title" : "Mindshare-Pizza",
+			"value" : 787
+		}
+		],
+		"campaign" : [{
+			"title" : "Dove  - App | IST",
+			"value" : 12
+		}, {
+			"title" : "PizzaHut 2 - App | EXP",
+			"value" : 13
+		}, {
+			"title" : "Vaseline - MA | EXP",
+			"value" : 15
+		}, {
+			"title" : "KFC SIN 1 - MA | EXP",
+			"value" : 19
+		}, {
+			"title" : "KFC SIN 2 - MA | EXP",
+			"value" : 20
+		}, {
+			"title" : "Axe - MA | EXP",
+			"value" : 22
+		}, {
+			"title" : "Lipton - MA | EXP",
+			"value" : 31
+		}, {
+			"title" : "Cornetto - MA | EXP",
+			"value" : 32
+		}, {
+			"title" : "Walls - IA | IST",
+			"value" : 34
+		}
+		],
+		"creative" : [{
+			"title" : "Dove v1",
+			"value" : 17
+		}, {
+			"title" : "PizzaHut v1",
+			"value" : 18
+		}, {
+			"title" : "Vaseline v1",
+			"value" : 20
+		}, {
+			"title" : "KFC SIN 1 - v1",
+			"value" : 24
+		}, {
+			"title" : "KFC SIN 2 - v1",
+			"value" : 25
+		}, {
+			"title" : "Axe v1",
+			"value" : 27
+		}, {
+			"title" : "lipton v1",
+			"value" : 36
+		}, {
+			"title" : "Cornetto - IA | EXP",
+			"value" : 37
+		}, {
+			"title" : "Walls - IA | IST",
+			"value" : 39
+		}
+		]
 	};
+
+
+	// {
+	// 	'advertiser' : [{title:'Advertiser 1',value:'1'}, {title:'Advertise 2',value:'2'} ],
+	// 	'campaign'   : [{title:'Campaign 1',value:'1'}, {title:'Campaign 2',value:'2'} ],
+	// 	'creative'   : [{title:'Creative 1',value:'1'}, {title:'Creative 2',value:'2'} ]
+	// };
 
 	/*
 	* The public API
