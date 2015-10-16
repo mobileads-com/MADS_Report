@@ -39,13 +39,13 @@ define(function (require) {
 			$(ele).kumaGauge({
 				min: 0,
 				max: data.max,
-				value : data.rate,
+				value : data.rate, //located on the middle of the gauge
 				fill : '#F34A53',
 				gaugeBackground : '#1E4147',
 				gaugeWidth : 30,
 				showNeedle : true,
 				needleHeight : 85,
-				actualValue : { // the value
+				actualValue : { // the value, located at the bottom of the gauge, just below the title
 					display : true,
 					value: data.value,
 					fontFamily : 'Arial', 
@@ -62,13 +62,13 @@ define(function (require) {
 				},
 				benchmark : {
 					display : true,
-					value : data.benchmark,
+					value : data.benchmark, // located on top of the gauge
 					fontFamily : 'Arial',
 					fontColor : '#000',
 					fontSize : 20, 
 					fontWeight : 'normal',
 				},
-				title : {
+				title : { // to indicate if gauge is for eng, exp and ct
 					display : true,
 					value : data.title,
 					fontFamily : 'Arial',
@@ -112,6 +112,7 @@ define(function (require) {
 			return benchmark.toFixed(2);
 		}
 
+		//used to update gauge data
 		gauge.prototype.update = function(ele, type, impressions){ //type = exp, eng or ct
 			var _this = this;
 			var benchmark = _this.getBenchmark(type, impressions);
@@ -147,6 +148,7 @@ define(function (require) {
 		};
 		
 		this.inittable = function(report) {
+			// report.data = [];
 			var g = new gauge();
 			//used for modifying total data on the table headers
 			$('#table-data > thead > tr > th:nth-child(2)').empty().append('Impressions <p>'+ report.impressions +'</p>');
@@ -158,36 +160,44 @@ define(function (require) {
 			$('#table-data > thead > tr > th:nth-child(8)').empty().append('Type 3 <p>'+ report.engagementType[2].type3 + ' ('+ g.getRate(report.engagementType[2].type3, report.impressions) + '%) </p>');
 			$('#table-data > thead > tr > th:nth-child(9)').empty().append('Type 4 <p>'+ report.engagementType[3].type4 + ' ('+ g.getRate(report.engagementType[3].type4, report.impressions) + '%) </p>');
 			$('#table-data > tbody').empty();
-			$.each(report.data, function(index, val) {
+
+			if(report.data.length > 0){
+				$.each(report.data, function(index, val) {
+					$('#table-data > tbody').append('<tr>\
+						<td class="text-center">'+ val.date +' </td>\
+						<td class="text-right">'+ val.impressions +'</td>\
+						<td class="text-right">'+ val.expansion +' ('+ g.getRate(val.expansion, report.impressions) + '%)</td>\
+						<td class="text-right">'+ val.engagement +' ('+ g.getRate(val.engagement, report.impressions) + '%)</td>\
+						<td class="text-right">'+ val.clickthrough +' ('+ g.getRate(val.clickthrough, report.impressions) + '%)</td>\
+						<td class="text-right">'+ val.type1 + ' ('+ g.getRate(val.type1, report.impressions) + '%)</td>\
+						<td class="text-right">'+ val.type2 + ' ('+ g.getRate(val.type2, report.impressions) + '%)</td>\
+						<td class="text-right">'+ val.type3 + ' ('+ g.getRate(val.type3, report.impressions) + '%)</td>\
+						<td class="text-right">'+ val.type4 + ' ('+ g.getRate(val.type4, report.impressions) + '%)</td>\
+						</tr>'
+					);
+				});
+				$('#btnExcel').on('click', function(){
+					$('#table-data').tableExport({type:'excel',escape:'false', fileName : 'table-report'});
+				}).removeClass('hidden');
+			}else{
 				$('#table-data > tbody').append('<tr>\
-					<td class="text-center">'+ val.date +' </td>\
-					<td class="text-right">'+ val.impressions +'</td>\
-					<td class="text-right">'+ val.expansion +' ('+ g.getRate(val.expansion, report.impressions) + '%)</td>\
-					<td class="text-right">'+ val.engagement +' ('+ g.getRate(val.engagement, report.impressions) + '%)</td>\
-					<td class="text-right">'+ val.clickthrough +' ('+ g.getRate(val.clickthrough, report.impressions) + '%)</td>\
-					<td class="text-right">'+ val.type1 + ' ('+ g.getRate(val.type1, report.impressions) + '%)</td>\
-					<td class="text-right">'+ val.type2 + ' ('+ g.getRate(val.type2, report.impressions) + '%)</td>\
-					<td class="text-right">'+ val.type3 + ' ('+ g.getRate(val.type3, report.impressions) + '%)</td>\
-					<td class="text-right">'+ val.type4 + ' ('+ g.getRate(val.type4, report.impressions) + '%)</td>\
+					<td class="text-center" colspan="10">No data to display</td>\
 					</tr>'
 				);
-			});
-			
+				$('#btnExcel').addClass('hidden');
+			}
+
 			/**
 			* IMPLEMENT CUSTOM TABLE PAGINATION
 			* PARAMS : pagerSelector - element, perPage - records count to display
 			*/
 			$('#table-data > tbody').pageMe({ pagerSelector:'#table-pager', showPrevNext:true,hidePageNumbers:false, perPage:5 });
+
 			//refresh the table to implement tablesaw responsive
 			$('#table-data').table().data( "table" ).refresh();
 
 			//table sorter initialization
 			$('#table-data').tablesorter();
-			// $('#table-data').trigger('refreshWidgets', [false, false]);
-			//
-			$('#btnExcel').on('click', function(){
-				$('#table-data').tableExport({type:'excel',escape:'false'})
-			});
 		}
 
 		this.initdonut = function(report){
@@ -286,6 +296,7 @@ define(function (require) {
 				$(this).parent().find('input').click();
 			});
 
+			//form submit to fetch data to be feed to the elements/components and update
 			this.$el.on('submit', '#form-data', function(){
 				var data = {
 					'pubUserId' : $('#cboAdvertiser').val(),
