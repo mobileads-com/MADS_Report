@@ -1,3 +1,19 @@
+/* Extra Small Devices, Phones */ 
+@media only screen and (max-width : 892px) {
+	.well.impressions {
+		height: 21%;
+		padding-top: 50px;
+	}
+}
+
+@media only screen and (min-width : 893px) {
+	.well.impressions {
+		height: 27%;
+		padding-top: 50px;
+	}
+}
+
+
 .demo-placeholder {
 	width: 100%;
 	height: 100%;
@@ -14,10 +30,10 @@
 	height: 400px;
 }
 
-.well.impressions {
+/*.well.impressions {
 	height: 27%;
 	padding-top: 50px;
-}
+}*/
 
 .well.impressions p {
 	font-size: 19px;
@@ -27,40 +43,47 @@
 	vertical-align: top;
 }
 
-#table-data > thead > tr > th:not(p) {
+/*#table-data > thead > tr > th > span {
 	font-weight: BOLD;
 }
 
 #table-data > thead > tr > th > p {
 	font-weight: normal;
 	padding-top: 6px;
-}
+	}*/
 
-#table-data > tbody > tr > td:first-child {
-	border-left: 1px solid #e4e1de;
-}
+	#table-data > tbody > tr > td:first-child {
+		border-left: 1px solid #e4e1de;
+	}
 
-#table-data > tbody > tr > td:last-child {
-	border-right: 1px solid #e4e1de;
-}
+	#table-data > tbody > tr > td:last-child {
+		border-right: 1px solid #e4e1de;
+	}
 
-.data-export {
-	margin-top: -8px;
-	position: absolute;
-}
+	.head-label{
+		font-weight: BOLD;
+	}
 
-.gauge-holder.form-group {
-	padding-bottom: 10px;
-}
+	.head-value{
+		margin-top: 10px;
+	}
+	.data-export {
+		margin-top: -8px;
+		position: absolute;
+	}
 
-.rangepicker {
-	position: relative;
-}
+	.gauge-holder.form-group {
+		padding-bottom: 10px;
+	}
 
-.rangepicker i {
-	position: absolute;
-	bottom: 10px;
-	right: 14px;
-	top: auto;
-	cursor: pointer;
-}
+	.rangepicker {
+		position: relative;
+	}
+
+	.rangepicker i {
+		position: absolute;
+		bottom: 10px;
+		right: 14px;
+		top: auto;
+		cursor: pointer;
+	}

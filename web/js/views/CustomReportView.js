@@ -151,14 +151,14 @@ define(function (require) {
 			// report.data = [];
 			var g = new gauge();
 			//used for modifying total data on the table headers
-			$('#table-data > thead > tr > th:nth-child(2)').empty().append('Impressions <p>'+ report.impressions +'</p>');
-			$('#table-data > thead > tr > th:nth-child(3)').empty().append('Expansions <p>'+ report.expansion + ' ('+ g.getRate(report.expansion, report.impressions) + '%) </p>');
-			$('#table-data > thead > tr > th:nth-child(4)').empty().append('Engagement <p>'+ report.engagement + ' ('+ g.getRate(report.engagement, report.impressions) + '%) </p>');
-			$('#table-data > thead > tr > th:nth-child(5)').empty().append('Clickthrough <p>'+ report.clickthrough + ' ('+ g.getRate(report.clickthrough, report.impressions) + '%) </p>');
-			$('#table-data > thead > tr > th:nth-child(6)').empty().append('Type 1 <p>'+ report.engagementType[0].type1 + ' ('+ g.getRate(report.engagementType[0].type1, report.impressions) + '%) </p>');
-			$('#table-data > thead > tr > th:nth-child(7)').empty().append('Type 2 <p>'+ report.engagementType[1].type2 + ' ('+ g.getRate(report.engagementType[1].type2, report.impressions) + '%) </p>');
-			$('#table-data > thead > tr > th:nth-child(8)').empty().append('Type 3 <p>'+ report.engagementType[2].type3 + ' ('+ g.getRate(report.engagementType[2].type3, report.impressions) + '%) </p>');
-			$('#table-data > thead > tr > th:nth-child(9)').empty().append('Type 4 <p>'+ report.engagementType[3].type4 + ' ('+ g.getRate(report.engagementType[3].type4, report.impressions) + '%) </p>');
+			$('#table-data > thead > tr > th:nth-child(2)').empty().append('<p class="head-label">Impressions</p> <p class="head-value">'+ report.impressions +'</p>');
+			$('#table-data > thead > tr > th:nth-child(3)').empty().append('<p class="head-label">Expansions</p> <p class="head-value">'+ report.expansion + ' ('+ g.getRate(report.expansion, report.impressions) + '%) </p>');
+			$('#table-data > thead > tr > th:nth-child(4)').empty().append('<p class="head-label">Engagement</p> <p class="head-value">'+ report.engagement + ' ('+ g.getRate(report.engagement, report.impressions) + '%) </p>');
+			$('#table-data > thead > tr > th:nth-child(5)').empty().append('<p class="head-label">Clickthrough</p> <p class="head-value">'+ report.clickthrough + ' ('+ g.getRate(report.clickthrough, report.impressions) + '%) </p>');
+			$('#table-data > thead > tr > th:nth-child(6)').empty().append('<p class="head-label">Type 1</p> <p class="head-value">'+ report.engagementType[0].type1 + ' ('+ g.getRate(report.engagementType[0].type1, report.impressions) + '%) </p>');
+			$('#table-data > thead > tr > th:nth-child(7)').empty().append('<p class="head-label">Type 2</p> <p class="head-value">'+ report.engagementType[1].type2 + ' ('+ g.getRate(report.engagementType[1].type2, report.impressions) + '%) </p>');
+			$('#table-data > thead > tr > th:nth-child(8)').empty().append('<p class="head-label">Type 3</p> <p class="head-value">'+ report.engagementType[2].type3 + ' ('+ g.getRate(report.engagementType[2].type3, report.impressions) + '%) </p>');
+			$('#table-data > thead > tr > th:nth-child(9)').empty().append('<p class="head-label">Type 4</p> <p class="head-value">'+ report.engagementType[3].type4 + ' ('+ g.getRate(report.engagementType[3].type4, report.impressions) + '%) </p>');
 			$('#table-data > tbody').empty();
 
 			if(report.data.length > 0){
