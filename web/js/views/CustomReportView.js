@@ -4,7 +4,7 @@ define(function (require) {
 
 	var $ = require('jquery'),
 	Handlebars = require('handlebars'),
-	// customReportAdapter = require('adapters/custom-report'),
+	reportdataadapter = require('adapters/custom-report-memory'),
 	uHtml = require('text!tpl/CustomReport.html'),
 
 	jqueryexport = require('jqueryexport'),
@@ -30,7 +30,6 @@ define(function (require) {
 	uTpl= Handlebars.compile(uHtml);
 
 	return function (data) {
-
 		//the gauge object
 		var gauge = function(){}
 
@@ -106,6 +105,7 @@ define(function (require) {
 			var rate = value / impressions * 100;
 			return rate.toFixed(2);
 		}
+
 		//function to get benchmark value
 		gauge.prototype.getBenchmark = function(value, impressions){
 			var benchmark = value / impressions * 100;
@@ -142,10 +142,7 @@ define(function (require) {
 			});
 		}
 
-
-		this.initialize = function () {
-			this.$el = $('<div/>');
-		};
+		this.initialize = function () { this.$el = $('<div/>'); };
 		
 		this.inittable = function(report) {
 			// report.data = [];
@@ -250,7 +247,7 @@ define(function (require) {
 			g.initialize('.gauge-clickthrough', a);
 		}
 
-		this.initselect = function(options){
+		this.initselect = function(){
 			//selectpicker object
 			var select = function (){
 				$('.selectpicker').selectpicker();
@@ -265,12 +262,13 @@ define(function (require) {
 				$(obj).selectpicker('refresh');
 			}
 
-			
-			var s = new select();
-			//feed the data to the selectpickers.
-			s.populate('#cboAdvertiser', options.advertiser);
-			s.populate('#cboCampaign', options.campaign);
-			s.populate('#cboCreatives', options.creative);
+			reportdataadapter.getFilterOptions().done(function(data){
+				var s = new select();
+				//feed the data to the selectpickers.
+				s.populate('#cboAdvertiser', data.advertiser);
+				s.populate('#cboCampaign', data.campaign);
+				s.populate('#cboCreatives', data.creative);
+			});
 		}
 
 		//Initialization of the datepicker
@@ -302,21 +300,19 @@ define(function (require) {
 
 			//form submit to fetch data to be feed to the elements/components and update
 			this.$el.on('submit', '#form-data', function(){
-				var data = {
+				var options = {
 					'pubUserId' : $('#cboAdvertiser').val(),
 					'campaignId' : $('#cboCampaign').val(),
 					'studioId' : $('#cboCreatives').val(),
 					'startDate' : $('#txtDateFrom').data('daterangepicker').startDate.format('YYYY-MM-DD'),
 					'endDate' : $('#txtDateFrom').data('daterangepicker').endDate.format('YYYY-MM-DD')
 				}
-
-				//ajax request to fetch data from server and update plugins data.
-				$.post('', data , function(data, textStatus, xhr) {
-					// _this.initdonut(data.engagementType);
-					//_this.inittable(data);
-					// gauge.prototype.update('.gauge-expansion', data.expansion, data.impressions);
-					// gauge.prototype.update('.gauge-engagement', data.engagement, data.impressions);
-					// gauge.prototype.update('.gauge-clickthrough', data.clickthrough, data.impressions);
+				reportdataadapter.getCustomReport(options).done(function(data){
+					_this.initdonut(data.engagementType);
+					_this.inittable(data);
+				  	gauge.prototype.update('.gauge-expansion', data.expansion, data.impressions);
+					gauge.prototype.update('.gauge-engagement', data.engagement, data.impressions);
+					gauge.prototype.update('.gauge-clickthrough', data.clickthrough, data.impressions);
 				});
 				return false;
 			});
@@ -326,6 +322,22 @@ define(function (require) {
 			this.$el.html(uTpl(data));
 			return this;
 		};
+
+		this.chart = function(){
+			var _this = this;
+			var options = {
+				'pubUserId' : $('#cboAdvertiser').val(),
+				'campaignId' : $('#cboCampaign').val(),
+				'studioId' : $('#cboCreatives').val(),
+				'startDate' : $('#txtDateFrom').data('daterangepicker').startDate.format('YYYY-MM-DD'),
+				'endDate' : $('#txtDateFrom').data('daterangepicker').endDate.format('YYYY-MM-DD')
+			}
+			reportdataadapter.getCustomReport(options).done(function(data){
+				_this.initgauge(data);
+				_this.initdonut(data.engagementType);
+				_this.inittable(data);
+			});
+		}
 
 		this.initialize();
 	};

@@ -15,8 +15,6 @@ require.config({
 		flot : 'donut/jquery.flot',
 		flotpie : 'donut/jquery.flot.pie',
 		flotresize : 'donut/jquery.flot.resize',
-		// bootstraptable : 'bootstrap-table.min',
-		// tableexport : 'export/bootstrap-table-export.min',
 		jqueryexport : 'export/jquery-table-export.min',
 		jquerysort : 'sort/jquery-table-sorter.min',
 		tablesaw : 'tablesaw',
@@ -64,14 +62,6 @@ require.config({
 			deps : ['jquery', 'flot', 'flotpie'],
 			exports : 'flotresize'
 		},
-		// bootstraptable : {
-		// 	deps : ['jquery'],
-		// 	exports : 'bootstraptable'
-		// },
-		// tableexport : {
-		// 	deps : ['jquery', 'bootstraptable'],
-		// 	exports : 'bootstraptableexport'
-		// },
 		jqueryexport : {
 			deps : ['jquery'],
 			exports : 'jqueryexport'

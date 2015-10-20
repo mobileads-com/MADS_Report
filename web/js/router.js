@@ -4,7 +4,6 @@ define(function (require) {
 
 	var $                       = require('jquery'),
 	CustomReportView        = require("view/CustomReportView"),
-	reportdataadapter = require('adapters/custom-report-memory'),
 	customReportUrl         = /^#customReport/;
 
 
@@ -21,19 +20,9 @@ define(function (require) {
 		if (match) {
 			view = new CustomReportView();
 			$('.main-content').html(view.render().$el);
-
-			reportdataadapter.getFilterOptions().done(function(data){
-				view.initselect(data);
-			});	
-			reportdataadapter.getCustomReport().done(function(data){
-				// console.log(data);
-				// setTimeout(function(){
-					view.initgauge(data);
-					view.initdonut(data.engagementType);
-					view.inittable(data);
-				// }, 2000);
-			});
+			view.initselect();
 			view.initdatepicker();
+			view.chart();
 			view.events();
 		}
 		

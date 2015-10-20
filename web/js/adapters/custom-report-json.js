@@ -7,13 +7,12 @@ define(function (require) {
 			url: 'custom_report',
 			type: 'POST',
 			data: {
-				'advertiser' : 'value',
-				'campaign' : 'value',
-				'creative' : 'value',
-				'start-date' : '4/22/2015',
-				'end-date' : '4/22/2015'
+				'advertiser' : options.pubUserId,
+				'campaign' : options.campaignId,
+				'creative' : options.studioId,
+				'start-date' : options.startDate,
+				'end-date' : options.endDate
 			}
-
 		});
 	},
 	
