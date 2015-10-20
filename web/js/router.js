@@ -22,7 +22,7 @@ define(function (require) {
 			$('.main-content').html(view.render().$el);
 			view.initselect();
 			view.initdatepicker();
-			view.chart();
+			view.chart(false);
 			view.events();
 		}
 		

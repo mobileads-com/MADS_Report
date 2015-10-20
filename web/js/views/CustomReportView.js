@@ -307,13 +307,15 @@ define(function (require) {
 					'startDate' : $('#txtDateFrom').data('daterangepicker').startDate.format('YYYY-MM-DD'),
 					'endDate' : $('#txtDateFrom').data('daterangepicker').endDate.format('YYYY-MM-DD')
 				}
-				reportdataadapter.getCustomReport(options).done(function(data){
-					_this.initdonut(data.engagementType);
-					_this.inittable(data);
-				  	gauge.prototype.update('.gauge-expansion', data.expansion, data.impressions);
-					gauge.prototype.update('.gauge-engagement', data.engagement, data.impressions);
-					gauge.prototype.update('.gauge-clickthrough', data.clickthrough, data.impressions);
-				});
+
+				_this.chart(true);
+				// reportdataadapter.getCustomReport(options).done(function(data){
+				// 	_this.initdonut(data.engagementType);
+				// 	_this.inittable(data);
+				//   	gauge.prototype.update('.gauge-expansion', data.expansion, data.impressions);
+				// 	gauge.prototype.update('.gauge-engagement', data.engagement, data.impressions);
+				// 	gauge.prototype.update('.gauge-clickthrough', data.clickthrough, data.impressions);
+				// });
 				return false;
 			});
 		}
@@ -323,7 +325,8 @@ define(function (require) {
 			return this;
 		};
 
-		this.chart = function(){
+		//param : updts { false : initialize gauge, true : update gauge }
+		this.chart = function(updts){
 			var _this = this;
 			var options = {
 				'pubUserId' : $('#cboAdvertiser').val(),
@@ -333,12 +336,18 @@ define(function (require) {
 				'endDate' : $('#txtDateFrom').data('daterangepicker').endDate.format('YYYY-MM-DD')
 			}
 			reportdataadapter.getCustomReport(options).done(function(data){
-				_this.initgauge(data);
-				_this.initdonut(data.engagementType);
 				_this.inittable(data);
+				_this.initdonut(data.engagementType);
+				if(updts){
+					gauge.prototype.update('.gauge-expansion', data.expansion, data.impressions);
+					gauge.prototype.update('.gauge-engagement', data.engagement, data.impressions);
+					gauge.prototype.update('.gauge-clickthrough', data.clickthrough, data.impressions);
+				}else{
+					_this.initgauge(data);
+				}
 			});
 		}
 
 		this.initialize();
-	};
+	}; 
 });
