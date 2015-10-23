@@ -4,7 +4,8 @@ define(function (require) {
 
 	var $ = require('jquery'),
 	Handlebars = require('handlebars'),
-	reportdataadapter = require('adapters/custom-report-memory'),
+	reportdataadapter = require('adapters/custom-report'),
+	memorydataadapter = require('adapters/custom-report-memory'),
 	uHtml = require('text!tpl/CustomReport.html'),
 
 	jqueryexport = require('jqueryexport'),
@@ -24,8 +25,6 @@ define(function (require) {
 
 	raphael = require('raphael'),
 	gauge = require('kumagauge'),
-
-	
 
 	uTpl= Handlebars.compile(uHtml);
 
@@ -102,12 +101,16 @@ define(function (require) {
 
 		//function to get rate
 		gauge.prototype.getRate = function(value, impressions){
+
+			if(value < 1){ return 0; }
 			var rate = value / impressions * 100;
+			if(!isFinite(rate)){ return 0; }
 			return rate.toFixed(2);
 		}
 
 		//function to get benchmark value
 		gauge.prototype.getBenchmark = function(value, impressions){
+			if(value < 1){ return 0; }
 			var benchmark = value / impressions * 100;
 			return benchmark.toFixed(2);
 		}
@@ -127,8 +130,8 @@ define(function (require) {
 		}
 
 		//donut object
-		var donut = function(data){
-			var placeholder = $("#donut");
+		var donut = function(data, obj){
+			var placeholder = $(obj);
 			$.plot(placeholder, data, {
 				series: {
 					pie: { 
@@ -179,29 +182,33 @@ define(function (require) {
 					$('#table-data').tableExport({type: type ,escape:'false', fileName : 'table-report'});
 				});
 				$('.data-export').removeClass('hidden');
-
+				$('#table-data').table().data( "table" ).refresh();
+				$('.tablesaw-bar').removeClass('hidden');
 			}else{
 				$('#table-data > tbody').append('<tr>\
 					<td class="text-center" colspan="10">No data to display</td>\
 					</tr>'
 				);
-				$('#btnExcel').addClass('hidden');
+				$('.data-export').addClass('hidden');
+				$('#table-data').table().data( "table" ).refresh();
+				$('.tablesaw-bar').addClass('hidden');
 			}
 
 			/**
 			* IMPLEMENT CUSTOM TABLE PAGINATION
 			* PARAMS : pagerSelector - element, perPage - records count to display
 			*/
+			$('#table-pager').empty();
 			$('#table-data > tbody').pageMe({ pagerSelector:'#table-pager', showPrevNext:true,hidePageNumbers:false, perPage:5 });
 
 			//refresh the table to implement tablesaw responsive
-			$('#table-data').table().data( "table" ).refresh();
+			// $('#table-data').table().data( "table" ).refresh();
 
 			//table sorter initialization
 			$('#table-data').tablesorter();
 		}
 
-		this.initdonut = function(report){
+		this.initdonut = function(report, obj){
 			var data = [];
 			//Loop through the data and push to the new array to suit names and labels
 			$.each(report, function(index, val) {
@@ -211,7 +218,7 @@ define(function (require) {
 				a.data = val['type'+ i];
 				data.push(a);
 			});
-			var d = new donut(data);
+			var d = new donut(data, obj);
 		}	
 
 		this.initgauge = function(report){
@@ -238,7 +245,7 @@ define(function (require) {
 			g.initialize('.gauge-engagement', a);
 
 			//Initialization of gauge for clickthrough data
-			a = {}
+			a = {};
 			a.title = 'Clickthrough';
 			a.value = report.clickthrough;
 			a.benchmark = g.getBenchmark(report.clickthrough, report.impressions); 
@@ -248,6 +255,7 @@ define(function (require) {
 		}
 
 		this.initselect = function(){
+			var filters;
 			//selectpicker object
 			var select = function (){
 				$('.selectpicker').selectpicker();
@@ -255,19 +263,49 @@ define(function (require) {
 
 			//used to loop through array of data and populate selectpicker
 			select.prototype.populate = function(obj, selection){
-				$(obj).empty();
+				$(obj).empty().append('<option value="0"> Select '+ $(obj).attr('data-type') +'</option>');
 				$.each(selection, function(index, val) {
 					$(obj).append('<option value="'+ val.value +'">'+ val.title +'</option>');
 				});
 				$(obj).selectpicker('refresh');
 			}
 
-			reportdataadapter.getFilterOptions().done(function(data){
+			//apply filter to bootstrap select
+			select.prototype.filter = function(obj, selection, filter_object, id){
+				var o = $(obj).val();
+				$(filter_object).empty().append('<option value="0"> Select '+ $(filter_object).attr('data-type') +'</option>');
+				$.each(selection, function(index, val) {
+					if(o != 0){
+						if(val[id] == o){
+							$(filter_object).append('<option value="'+ val.value +'">'+ val.title +'</option>');
+						}
+					}else{
+						$(filter_object).append('<option value="'+ val.value +'">'+ val.title +'</option>');
+					}
+				});
+				$(filter_object).selectpicker('refresh');
+			}
+
+			reportdataadapter.getFilterOptions().done(function(res){
+				filters = res;
 				var s = new select();
 				//feed the data to the selectpickers.
-				s.populate('#cboAdvertiser', data.advertiser);
-				s.populate('#cboCampaign', data.campaign);
-				s.populate('#cboCreatives', data.creative);
+				s.populate('#cboAdvertiser', res.advertiser);
+				s.populate('#cboCampaign', res.campaign);
+				s.populate('#cboCreatives', res.creative);
+			}).fail(function(){
+				$('#cboAdvertiser, #cboCampaign, #cboCreatives').empty().append('<option value="0"> No data found</option>');
+				$('.selectpicker').selectpicker('refresh');
+				$('.button-submit').prop('disabled', true);
+				alert('Error in connecting with the server.');
+			});
+
+			$('#cboAdvertiser').on('change', function(){
+				select.prototype.filter('#cboAdvertiser', filters.campaign, '#cboCampaign', 'advertiser_id');
+			});
+
+			$('#cboCampaign').on('change', function(){
+				select.prototype.filter('#cboCampaign', filters.creative, '#cboCreatives', 'campaign_id');
 			});
 		}
 
@@ -299,7 +337,7 @@ define(function (require) {
 			});
 
 			//form submit to fetch data to be feed to the elements/components and update
-			this.$el.on('submit', '#form-data', function(){
+			$('#form-data').on('submit', function(){
 				var options = {
 					'pubUserId' : $('#cboAdvertiser').val(),
 					'campaignId' : $('#cboCampaign').val(),
@@ -307,15 +345,16 @@ define(function (require) {
 					'startDate' : $('#txtDateFrom').data('daterangepicker').startDate.format('YYYY-MM-DD'),
 					'endDate' : $('#txtDateFrom').data('daterangepicker').endDate.format('YYYY-MM-DD')
 				}
-
-				_this.chart(true);
-				// reportdataadapter.getCustomReport(options).done(function(data){
-				// 	_this.initdonut(data.engagementType);
-				// 	_this.inittable(data);
-				//   	gauge.prototype.update('.gauge-expansion', data.expansion, data.impressions);
-				// 	gauge.prototype.update('.gauge-engagement', data.engagement, data.impressions);
-				// 	gauge.prototype.update('.gauge-clickthrough', data.clickthrough, data.impressions);
-				// });
+				reportdataadapter.getCustomReport(options).done(function(data){
+					_this.initdonut(data.engagementType, '#donut');
+					_this.inittable(data);
+				  	gauge.prototype.update('.gauge-expansion', data.expansion, data.impressions);
+					gauge.prototype.update('.gauge-engagement', data.engagement, data.impressions);
+					gauge.prototype.update('.gauge-clickthrough', data.clickthrough, data.impressions);
+					$('.impressions-total').text(data.impressions);
+				}).fail(function(){
+					alert('An exception was encountered while fetching data.');
+				});
 				return false;
 			});
 		}
@@ -325,8 +364,7 @@ define(function (require) {
 			return this;
 		};
 
-		//param : updts { false : initialize gauge, true : update gauge }
-		this.chart = function(updts){
+		this.chart = function(){
 			var _this = this;
 			var options = {
 				'pubUserId' : $('#cboAdvertiser').val(),
@@ -335,16 +373,10 @@ define(function (require) {
 				'startDate' : $('#txtDateFrom').data('daterangepicker').startDate.format('YYYY-MM-DD'),
 				'endDate' : $('#txtDateFrom').data('daterangepicker').endDate.format('YYYY-MM-DD')
 			}
-			reportdataadapter.getCustomReport(options).done(function(data){
+			memorydataadapter.getCustomReport(options).done(function(data){
 				_this.inittable(data);
-				_this.initdonut(data.engagementType);
-				if(updts){
-					gauge.prototype.update('.gauge-expansion', data.expansion, data.impressions);
-					gauge.prototype.update('.gauge-engagement', data.engagement, data.impressions);
-					gauge.prototype.update('.gauge-clickthrough', data.clickthrough, data.impressions);
-				}else{
-					_this.initgauge(data);
-				}
+				_this.initdonut(data.engagementType, '#donut');
+				_this.initgauge(data);
 			});
 		}
 

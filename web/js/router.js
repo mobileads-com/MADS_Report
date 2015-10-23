@@ -12,19 +12,18 @@ define(function (require) {
 		var hash = window.location.hash, match, view;
 
 		if (!hash) {
-
 			$('.main-content').html();
 		}
 
 		match = hash.match(customReportUrl);
-		if (match) {
+		// if (match) {
 			view = new CustomReportView();
 			$('.main-content').html(view.render().$el);
 			view.initselect();
 			view.initdatepicker();
-			view.chart(false);
+			view.chart();
 			view.events();
-		}
+		// }
 		
 	},
 

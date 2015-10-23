@@ -8,6 +8,13 @@ define(function (require) {
 		deferred.resolve(customReport);
 		return deferred.promise();
 	},
+
+	getCustomReport2 = function (opts) { 
+		var deferred = $.Deferred();
+
+		deferred.resolve(customReport2);
+		return deferred.promise();
+	},
 	
 	getFilterOptions = function () { 
 		var deferred = $.Deferred();
@@ -17,125 +24,274 @@ define(function (require) {
 	},
 
 	customReport = {
-		'impressions' : 50000,
-		'expansion' : 7100,
-		'engagement' : 5200,
-		'clickthrough' : 1200,
+		'impressions' : 0,
+		'expansion' : 0,
+		'engagement' : 0,
+		'clickthrough' : 0,
 		'engagementType' : [{
-			'type1' : 320
+			'type1' : 100
 		},
 		{
-			'type2' : 280
+			'type2' : 100
 		},
 		{
-			'type3' : 297
+			'type3' : 100
 		},
 		{
-			'type4' : 111
+			'type4' : 100
 		}
 		],
-		'data': [{
-			'date' : '07/10/2015',
-			'impressions' : 18000,
-			'expansion' : 2500,
-			'engagement' : 1100,
-			'clickthrough' : 400,
-			'type1' : 120,
-			'type2' : 180,
-			'type3' : 87,
-			'type4' : 61,		
-		},{
-			'date' : '08/10/2015',
-			'impressions' : 16000,
-			'expansion' : 3500,
-			'engagement' : 2000,
-			'clickthrough' : 400,
-			'type1' : 110,
-			'type2' : 50,
-			'type3' : 110,
-			'type4' : 50,		
+		'data': []
+	},
+
+	customReport2 = {
+		'impressions' : 50000,
+		'expansion' : 4000,
+		'engagement' : 3000,
+		'clickthrough' : 2000,
+		'engagementType' : [{
+			'type1' : 10
 		},
 		{
-			'date' : '09/10/2015',
-			'impressions' : 16000,
-			'expansion' : 1100,
-			'engagement' : 2100,
-			'clickthrough' : 400,
-			'type1' : 90,
-			'type2' : 50,
-			'type3' : 100,
-			'type4' : 0,		
-		}]
+			'type2' : 40
+		},
+		{
+			'type3' : 21
+		},
+		{
+			'type4' : 29
+		}
+		],
+		'data': [
+		{
+		'date' : '07/10/2015',
+		'impressions' : 18000,
+		'expansion' : 2500,
+		'engagement' : 1100,
+		'clickthrough' : 400,
+		'type1' : 120,
+		'type2' : 180,
+		'type3' : 87,
+		'type4' : 61,		
+	},{
+		'date' : '08/10/2015',
+		'impressions' : 16000,
+		'expansion' : 3500,
+		'engagement' : 2000,
+		'clickthrough' : 400,
+		'type1' : 110,
+		'type2' : 50,
+		'type3' : 110,
+		'type4' : 50,		
+	},
+	{
+		'date' : '09/10/2015',
+		'impressions' : 16000,
+		'expansion' : 1100,
+		'engagement' : 2100,
+		'clickthrough' : 400,
+		'type1' : 90,
+		'type1' : 50,
+		'type1' : 100,
+		'type1' : 0,		
+	},
+	{
+		'date' : '07/10/2015',
+		'impressions' : 18000,
+		'expansion' : 2500,
+		'engagement' : 1100,
+		'clickthrough' : 400,
+		'type1' : 120,
+		'type2' : 180,
+		'type3' : 87,
+		'type4' : 61,		
+	},{
+		'date' : '08/10/2015',
+		'impressions' : 16000,
+		'expansion' : 3500,
+		'engagement' : 2000,
+		'clickthrough' : 400,
+		'type1' : 110,
+		'type2' : 50,
+		'type3' : 110,
+		'type4' : 50,		
+	},
+	{
+		'date' : '09/10/2015',
+		'impressions' : 16000,
+		'expansion' : 1100,
+		'engagement' : 2100,
+		'clickthrough' : 400,
+		'type1' : 90,
+		'type1' : 50,
+		'type1' : 100,
+		'type1' : 0,		
+	},
+	{
+		'date' : '07/10/2015',
+		'impressions' : 18000,
+		'expansion' : 2500,
+		'engagement' : 1100,
+		'clickthrough' : 400,
+		'type1' : 120,
+		'type2' : 180,
+		'type3' : 87,
+		'type4' : 61,		
+	},{
+		'date' : '08/10/2015',
+		'impressions' : 16000,
+		'expansion' : 3500,
+		'engagement' : 2000,
+		'clickthrough' : 400,
+		'type1' : 110,
+		'type2' : 50,
+		'type3' : 110,
+		'type4' : 50,		
+	},
+	{
+		'date' : '09/10/2015',
+		'impressions' : 16000,
+		'expansion' : 1100,
+		'engagement' : 2100,
+		'clickthrough' : 400,
+		'type1' : 90,
+		'type1' : 50,
+		'type1' : 100,
+		'type1' : 0,		
+	},
+	{
+		'date' : '07/10/2015',
+		'impressions' : 18000,
+		'expansion' : 2500,
+		'engagement' : 1100,
+		'clickthrough' : 400,
+		'type1' : 120,
+		'type2' : 180,
+		'type3' : 87,
+		'type4' : 61,		
+	},{
+		'date' : '08/10/2015',
+		'impressions' : 16000,
+		'expansion' : 3500,
+		'engagement' : 2000,
+		'clickthrough' : 400,
+		'type1' : 110,
+		'type2' : 50,
+		'type3' : 110,
+		'type4' : 50,		
+	},
+	{
+		'date' : '09/10/2015',
+		'impressions' : 16000,
+		'expansion' : 1100,
+		'engagement' : 2100,
+		'clickthrough' : 400,
+		'type1' : 90,
+		'type1' : 50,
+		'type1' : 100,
+		'type1' : 0,		
+	},
+	{
+		'date' : '07/10/2015',
+		'impressions' : 18000,
+		'expansion' : 2500,
+		'engagement' : 1100,
+		'clickthrough' : 400,
+		'type1' : 120,
+		'type2' : 180,
+		'type3' : 87,
+		'type4' : 61,		
+	},{
+		'date' : '08/10/2015',
+		'impressions' : 16000,
+		'expansion' : 3500,
+		'engagement' : 2000,
+		'clickthrough' : 400,
+		'type1' : 110,
+		'type2' : 50,
+		'type3' : 110,
+		'type4' : 50,		
+	},
+	{
+		'date' : '09/10/2015',
+		'impressions' : 16000,
+		'expansion' : 1100,
+		'engagement' : 2100,
+		'clickthrough' : 400,
+		'type1' : 90,
+		'type1' : 50,
+		'type1' : 100,
+		'type1' : 0,		
+	}
+	]
 	},
 	
 	filterOptions = {
 		"advertiser" : [{
-			"title" : "Test Advertiser",
-			"value" : 302
+			"title" : "Varun",
+			"value" : 1
 		}, {
 			"title" : "Mervin",
-			"value" : 734
+			"value" : 2
 		}, {
-			"title" : "Mindshare-Pizza",
-			"value" : 787
+			"title" : "Mindshare",
+			"value" : 3
 		}
 		],
 		"campaign" : [{
-			"title" : "Dove  - App | IST",
-			"value" : 12
+			"title" : "Varun 1",
+			"value" : 1,
+			"advertiser_id"	: 1
 		}, {
-			"title" : "PizzaHut 2 - App | EXP",
-			"value" : 13
+			"title" : "Mindshare 1",
+			"value" : 2,
+			"advertiser_id"	: 3
 		}, {
-			"title" : "Vaseline - MA | EXP",
-			"value" : 15
+			"title" : "Varun 2",
+			"value" : 3,
+			"advertiser_id"	: 1
 		}, {
-			"title" : "KFC SIN 1 - MA | EXP",
-			"value" : 19
-		}, {
-			"title" : "KFC SIN 2 - MA | EXP",
-			"value" : 20
-		}, {
-			"title" : "Axe - MA | EXP",
-			"value" : 22
-		}, {
-			"title" : "Lipton - MA | EXP",
-			"value" : 31
-		}, {
-			"title" : "Cornetto - MA | EXP",
-			"value" : 32
-		}, {
-			"title" : "Walls - IA | IST",
-			"value" : 34
+			"title" : "Mervin 1",
+			"value" : 4,
+			"advertiser_id"	: 2
 		}
 		],
 		"creative" : [{
-			"title" : "Dove v1",
-			"value" : 17
+			"title" : "Mindshare C1",
+			"value" : 17,
+			"campaign_id"	: 2
 		}, {
-			"title" : "PizzaHut v1",
-			"value" : 18
+			"title" : "Mindshare C2",
+			"value" : 18,
+			"campaign_id"	: 2
 		}, {
-			"title" : "Vaseline v1",
-			"value" : 20
+			"title" : "Varun C1",
+			"value" : 20,
+			"campaign_id"	: 1
 		}, {
-			"title" : "KFC SIN 1 - v1",
-			"value" : 24
+			"title" : "Varun C2",
+			"value" : 24,
+			"campaign_id"	: 1
 		}, {
-			"title" : "KFC SIN 2 - v1",
-			"value" : 25
+			"title" : "Mervin C1",
+			"value" : 25,
+			"campaign_id"	: 4
 		}, {
-			"title" : "Axe v1",
-			"value" : 27
+			"title" : "Mervin C2",
+			"value" : 27,
+			"campaign_id"	: 4
 		}, {
-			"title" : "lipton v1",
-			"value" : 36
+			"title" : "Mindshare C3",
+			"value" : 36,
+			"campaign_id"	: 2
 		}, {
-			"title" : "Cornetto - IA | EXP",
-			"value" : 37
+			"title" : "Varun C3",
+			"value" : 37,
+			"campaign_id"	: 3
 		}, {
 			"title" : "Walls - IA | IST",
-			"value" : 39
+			"value" : 39,
+			"campaign_id"	: 4
 		}
 		]
 	};
@@ -145,6 +301,7 @@ define(function (require) {
 	*/
 	return {
 		getCustomReport: getCustomReport,
+		getCustomReport2: getCustomReport2,
 		getFilterOptions: getFilterOptions
 	};
 });

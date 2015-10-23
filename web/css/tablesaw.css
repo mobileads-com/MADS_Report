@@ -840,7 +840,7 @@ table.tablesaw thead td {
 
 .tablesaw-advance-dots {
   float: left;
-  margin: 10px 0 0 0 ;
+  margin: -2px 0 0 0 ;
   padding: 0;
   list-style: none;
 }

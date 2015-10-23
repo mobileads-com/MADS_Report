@@ -4,21 +4,21 @@ define(function (require) {
 
 	var getCustomReport = function (options) { 
 		return $.ajax({
-			url: 'custom_report',
+			url: '/custom_ad_overview',
 			type: 'POST',
 			data: {
-				'advertiser' : options.pubUserId,
-				'campaign' : options.campaignId,
-				'creative' : options.studioId,
-				'start-date' : options.startDate,
-				'end-date' : options.endDate
+				'pubUserId' : options.pubUserId,
+				'campaignId' : options.campaignId,
+				'studioId' : options.studioId,
+				'startDate' : options.startDate,
+				'endDate' : options.endDate
 			}
 		});
 	},
 	
-	getFilterOptions = function () { 
+	getFilterOptions = function () {
 		return $.ajax({
-			url: 'custom_report_filter',
+			url: '/get_filter_list',
 			type: 'POST'
 		});
 	};
